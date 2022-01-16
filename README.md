@@ -1,0 +1,1 @@
+This repository is for the Cyber Soldiers 2022 Testbot, which is built from brand new code base.
