@@ -1,1 +1,1 @@
-This repository is for the Cyber Soldiers 2022 Testbot, which is built from brand new code base.
+This repository is for the Cyber Soldiers 2022 robot built for the Rapid React game, which is built from brand new code base.
