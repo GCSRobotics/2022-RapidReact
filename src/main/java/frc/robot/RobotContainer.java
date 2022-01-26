@@ -7,13 +7,17 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSub;
+import frc.robot.subsystems.ShooterSub;
 
 public class RobotContainer {
   // Operator Interface
   private static OI oi = new OI();
 
   // Subsystems
-  DriveSubsystem m_driveSub = new DriveSubsystem();
+  DriveSubsystem driveSub = new DriveSubsystem();
+  ShooterSub shootSub = new ShooterSub();
+  IntakeSub IntakeSub = new IntakeSub();
   // Commands
 
   // Robot Container Constructor
@@ -21,7 +25,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
   }
-
+// 
   /**
    * Use this method to define your button->command mappings. Buttons can be
    * created by

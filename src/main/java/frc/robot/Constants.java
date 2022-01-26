@@ -24,4 +24,12 @@ public final class Constants {
     public final static double NeoEncoderCountsPerRev = 42;
     public final static double InchesPerMotorRotation = Math.PI * WheelDiameter / DriveGearRatio; // NeoEncoderCountsPerRev    
 
+
+    // Wheel Distance Calculations
+    public final static int TopShootingMotor = 21;
+    public final static int BottomShootingMotor = 22;
+
+    // Wheel Distance Calculations
+    public final static int IntakeMotor = 31;
+    
 }
