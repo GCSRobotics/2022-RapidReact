@@ -19,4 +19,11 @@ public class IntakeSub extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  public void Forward(){
+
+    IntakeMotor.set(.75);
+  }
+  public void Reverse(){
+    IntakeMotor.set(-.75);
+  }
 }

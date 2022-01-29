@@ -17,14 +17,20 @@ public class ShooterSub extends SubsystemBase {
   /** Creates a new ShooterSub. */
   private CANSparkMax TopShootingMotor = new CANSparkMax(Constants.TopShootingMotor, MotorType.kBrushless);
   private CANSparkMax BottomShootingMotor = new CANSparkMax(Constants.BottomShootingMotor,MotorType.kBrushless);
-  private RelativeEncoder leftEncoder;
-  private RelativeEncoder rightEncoder;
+  private RelativeEncoder TopEncoder;
+  private RelativeEncoder BottomEncoder;
   
-  public ShooterSub(){}
+  public ShooterSub(){
+    TopEncoder = TopShootingMotor.getEncoder();
+    BottomEncoder = BottomShootingMotor.getEncoder();
+    TopEncoder.setPositionConversionFactor(Constants.TopShooterConversionFactor);
+    BottomEncoder.setPositionConversionFactor(Constants.BottomShooterConversionFactor);
+  }
   private void getEncoder() {
   }
-  public void RunShooter(double speed){
-    TopShootingMotor.set(.75);
+  public void RunShooter(double upperspeed,double lowerspeed){
+    TopShootingMotor.set(upperspeed);
+    BottomShootingMotor.set(lowerspeed);
   }
   public double GetshooterSpeed(){
     GetEncodervalue(0.75);

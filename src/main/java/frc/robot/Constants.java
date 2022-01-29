@@ -25,11 +25,19 @@ public final class Constants {
     public final static double InchesPerMotorRotation = Math.PI * WheelDiameter / DriveGearRatio; // NeoEncoderCountsPerRev    
 
 
-    // Wheel Distance Calculations
+    // Shooter Constants
     public final static int TopShootingMotor = 21;
     public final static int BottomShootingMotor = 22;
+    public static final double TopShooterConversionFactor = 0;
+    public static final double BottomShooterConversionFactor = 0;
 
-    // Wheel Distance Calculations
+
+    // Intake Constants
     public final static int IntakeMotor = 31;
     
+
+    // Index Constants
+    public final static int UpperIndexMotor = 41;
+    public final static int LowerIndexMotor = 42;
+
 }
