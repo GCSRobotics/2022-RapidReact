@@ -28,6 +28,10 @@ public class ShooterSub extends SubsystemBase {
   }
   private void getEncoder() {
   }
+  public void RunShooter(int lowerspeed){
+    BottomShootingMotor.set(lowerspeed);
+  }
+  
   public void RunShooter(double upperspeed,double lowerspeed){
     TopShootingMotor.set(upperspeed);
     BottomShootingMotor.set(lowerspeed);
