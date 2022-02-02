@@ -47,4 +47,12 @@ public class ShooterSub extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+  
+  public void StopTopShooter(){
+    TopShootingMotor.set(0.0);
+  }
+  
+  public void StopBottomShooter(){
+    BottomShootingMotor.set(0.0);
+  }
 }
