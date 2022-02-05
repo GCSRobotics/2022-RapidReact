@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriveWithController;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.DriveSub.DriveSubsystem;
@@ -25,6 +26,11 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
   }
+
+  public void setTeleopDefaultCommands() {
+    driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
+}
+
 // 
   /**
    * Use this method to define your button->command mappings. Buttons can be

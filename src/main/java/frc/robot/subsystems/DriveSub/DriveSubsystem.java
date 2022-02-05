@@ -34,7 +34,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    rightMotorGroup.setInverted(true);
+    leftMotorGroup.setInverted(true);
 
     leftEncoder = leftFrontMotor.getEncoder();
     rightEncoder = rightFrontMotor.getEncoder();

@@ -39,9 +39,9 @@ public class DriveWithController extends CommandBase {
     }
 
     double forwardSpeed = driveController.getLeftY() * m_speedMultiplier;
-    double rotationSpeed = driveController.getLeftY() * m_rotationMultiplier;
+    double rotationSpeed = driveController.getRightX() * m_rotationMultiplier;
 
-   driveSubsystem.arcadeDrive(forwardSpeed, rotationSpeed);
+   driveSubsystem.arcadeDrive(rotationSpeed, forwardSpeed);
   }
 
   // Called once the command ends or is interrupted.

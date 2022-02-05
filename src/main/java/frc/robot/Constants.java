@@ -13,10 +13,10 @@ public final class Constants {
     public final static int OperatorJoystick = 1;
     
     // Motor Constants
-    public final static int LeftFrontDriveMotor = 10;
-    public final static int LeftRearDriveMotor = 11;
-    public final static int RightFrontDriveMotor = 12;
-    public final static int RightRearDriveMotor = 13;
+    public final static int LeftFrontDriveMotor = 12;
+    public final static int LeftRearDriveMotor = 13;
+    public final static int RightFrontDriveMotor = 10;
+    public final static int RightRearDriveMotor = 11;
 
     // Wheel Distance Calculations
     public final static double WheelDiameter = 6.00;

@@ -41,7 +41,7 @@ public class LoadCargo extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     indexSub.StopIndex();
-    intakeSub.Stop();
+    intakeSub.Stop();  
   }
 
   // Returns true when the command should end.
