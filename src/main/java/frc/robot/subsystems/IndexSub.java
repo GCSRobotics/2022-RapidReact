@@ -48,4 +48,7 @@ public class IndexSub extends SubsystemBase {
     //TODO:Add SensorLogic
     return true;
   }
+
+public void indexBall() {
+}
 }

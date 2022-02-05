@@ -6,7 +6,7 @@ package frc.robot.commands.Auto;
 
 import frc.robot.commands.Auto.DriveDistance;
 import frc.robot.commands.DriveSub.TurnDegreesGyro;
-//import frc.robot.commands.groupcommands.ShootPowerCell;
+import frc.robot.commands.groupcommands.ShootPowerCell;
 import frc.robot.commands.ShootCargo;
 import frc.robot.subsystems.DriveSub.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;

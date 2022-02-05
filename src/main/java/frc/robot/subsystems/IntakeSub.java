@@ -29,4 +29,7 @@ public class IntakeSub extends SubsystemBase {
   public void Stop(){
     IntakeMotor.set(0.0);
   }
+
+public void extendIntake() {
+}
 }
