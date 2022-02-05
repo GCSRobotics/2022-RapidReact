@@ -6,19 +6,24 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveWithController;
+import frc.robot.commands.Auto.AutonomousDistance;
+import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.DriveSub.DriveSubsystem;
 
 public class RobotContainer {
+
   // Operator Interface
   private static OI oi = new OI();
 
   // Subsystems
   DriveSubsystem driveSub = new DriveSubsystem();
   ShooterSub shootSub = new ShooterSub();
-  IntakeSub IntakeSub = new IntakeSub();
+  IntakeSub intakeSub = new IntakeSub();
+  IndexSub indexSub = new IndexSub();
   // Commands
 
   // Robot Container Constructor
@@ -29,9 +34,10 @@ public class RobotContainer {
 
   public void setTeleopDefaultCommands() {
     driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
-}
+  }
 
-// 
+
+  //
   /**
    * Use this method to define your button->command mappings. Buttons can be
    * created by
@@ -44,7 +50,6 @@ public class RobotContainer {
 
   }
 
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -54,4 +59,36 @@ public class RobotContainer {
   //   // An ExampleCommand will run in autonomous
   //   return m_autoCommand;
   // }
+
+      // Autonomous Commands
+      public Command GetAutonomousCommand() {
+        double WaitTime = 0.1;
+        double StraightSpeed = 0.40;
+        double TurnSpeed = 0.4;
+
+        // return new AutonomousDistance(drive);
+
+        // return new SequentialCommandGroup(
+        //     new DriveDistance(StraightSpeed, 150, drive),
+        //     new WaitCommand(WaitTime), 
+        //     new FindPowerCellA(drive));
+
+        // return new SequentialCommandGroup(
+        //     new DriveDistance(StraightSpeed, 162, drive),
+        //     new WaitCommand(WaitTime), 
+        //     new TurnDegreesGyro(TurnSpeed, -90, drive),
+        //     new WaitCommand(WaitTime), 
+        //     new FindPowerCellB(drive));
+
+        //return new BarrelRacing(drive);
+
+         //return new BouncePath(drive);
+
+        //return new SlalomPath(drive);
+
+        return new AutonomousDistance(driveSub , shootSub, indexSub, intakeSub);
+
+      }
 }
+
+
