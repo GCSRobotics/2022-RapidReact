@@ -98,4 +98,7 @@ public class DriveSubsystem extends SubsystemBase {
   public double getGyroRate() {
     return gyro.getRate();
   }
+
+  public void reset() {
+  }
 }
