@@ -22,7 +22,7 @@ public class IndexSub extends SubsystemBase {
   }
 
   public void UpperIndexForward(){
-    UpperIndexMotor.set(.50);
+    UpperIndexMotor.set(.75);
   }
   public void LowerIndexForward(){
     LowerIndexMotor.set(.75);
@@ -45,7 +45,7 @@ public class IndexSub extends SubsystemBase {
   }
 
   public boolean CargoLoaded(){
-    //TODO:Add SensorLogic
+    //TODO: Add SensorLogic
     return true;
   }
 
