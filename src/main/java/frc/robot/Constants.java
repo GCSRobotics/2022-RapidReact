@@ -37,7 +37,7 @@ public final class Constants {
     
 
     // Index Constants
-    public final static int UpperIndexMotor = 41;
-    public final static int LowerIndexMotor = 42;
+    public final static int FrontIndexMotor = 41;
+    public final static int BackIndexMotor = 42;
 
 }

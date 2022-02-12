@@ -37,7 +37,7 @@ public class ShootCargo extends CommandBase {
   public void execute() {
     shooterSub.RunShooter(0.7, 0.7);
     if ((new Date()).getTime() - initime.getTime() >2000) {
-      indexSub.LowerIndexForward();
+      indexSub.BackIndexForward();
    
     }
   }

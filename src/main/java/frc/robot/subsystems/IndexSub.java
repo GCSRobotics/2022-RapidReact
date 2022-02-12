@@ -12,8 +12,8 @@ import frc.robot.Constants;
 
 public class IndexSub extends SubsystemBase {
   /** Creates a new IndexSub. */
-  private CANSparkMax UpperIndexMotor = new CANSparkMax(Constants.UpperIndexMotor, MotorType.kBrushless);
-  private CANSparkMax LowerIndexMotor = new CANSparkMax(Constants.LowerIndexMotor, MotorType.kBrushless);
+  private CANSparkMax FrontIndexMotor = new CANSparkMax(Constants.FrontIndexMotor, MotorType.kBrushless);
+  private CANSparkMax BackIndexMotor = new CANSparkMax(Constants.BackIndexMotor, MotorType.kBrushless);
   public IndexSub() {}
 
   @Override
@@ -21,27 +21,27 @@ public class IndexSub extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void UpperIndexForward(){
-    UpperIndexMotor.set(.75);
+  public void FrontIndexForward(){
+    FrontIndexMotor.set(.75);
   }
-  public void LowerIndexForward(){
-    LowerIndexMotor.set(.75);
+  public void BackIndexForward(){
+    BackIndexMotor.set(.75);
   }
-  public void UpperIndexReverse(){
-    UpperIndexMotor.set(-.75);
+  public void FrontIndexReverse(){
+    FrontIndexMotor.set(-.75);
   }
-  public void LowerIndexReverse(){
-    LowerIndexMotor.set(-.75);
+  public void BackIndexReverse(){
+    BackIndexMotor.set(-.75);
   }
-  public void StopUpperIndex(){
-    UpperIndexMotor.set(0.0);
+  public void StopFrontIndex(){
+    FrontIndexMotor.set(0.0);
   }
-  public void StopLowerIndex(){
-    LowerIndexMotor.set(0.0);
+  public void StopBackIndex(){
+    BackIndexMotor.set(0.0);
   }
   public void StopIndex(){
-    StopUpperIndex();
-    StopLowerIndex();
+    StopFrontIndex();
+    StopBackIndex();
   }
 
   public boolean CargoLoaded(){
