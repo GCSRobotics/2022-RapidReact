@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.SPI;
@@ -41,12 +42,26 @@ public class DriveSubsystem extends SubsystemBase {
     leftEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
     rightEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
 
+    gyro.calibrate();
+    resetEncoders();
+
+    SmartDashboard.putNumber("LeftEncoder",leftEncoder.getPosition());
+    SmartDashboard.putNumber("RightEncoder",rightEncoder.getPosition());
+    SmartDashboard.putNumber("Gyro", gyro.getAngle());
+
+
+
     robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("LeftEncoder",leftEncoder.getPosition());
+    SmartDashboard.putNumber("RightEncoder",rightEncoder.getPosition());
+    SmartDashboard.putNumber("Gyro", gyro.getAngle());
+    System.out.print(leftEncoder.getPosition());
+
     // This method will be called once per scheduler run
   }
 

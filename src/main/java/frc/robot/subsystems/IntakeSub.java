@@ -15,13 +15,13 @@ import frc.robot.Constants;
 public class IntakeSub extends SubsystemBase {
   /** Creates a new IntakeSub. */
   private CANSparkMax IntakeMotor = new CANSparkMax(Constants.IntakeMotor, MotorType.kBrushless);
-  private static final DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.IntakeExtendChannel, Constants.IntakeRetractChannel);
+  // private static final DoubleSolenoid solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.IntakeExtendChannel, Constants.IntakeRetractChannel);
 
- 
+
   public IntakeSub() {
     //addChild("IntakeMotor", IntakeMotor);
-    addChild("solenoid", solenoid);
-    solenoid.set(DoubleSolenoid.Value.kReverse);
+    // addChild("solenoid", solenoid);
+    // solenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
   @Override
@@ -30,10 +30,10 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void Forward(){
-      if (DoubleSolenoid.Value.kForward == solenoid.get()) {
+      // if (DoubleSolenoid.Value.kForward == solenoid.get()) {
         IntakeMotor.set(.75);
     }
-  }
+  // }
 
   public void Reverse(){
     IntakeMotor.set(-.75);
@@ -44,13 +44,13 @@ public class IntakeSub extends SubsystemBase {
   }
 
 public void extendIntake() {
-    if (DoubleSolenoid.Value.kForward == solenoid.get()){
-      solenoid.toggle();
-    }
+    // if (DoubleSolenoid.Value.kForward == solenoid.get()){
+    //   solenoid.toggle();
+    // }
 }
 
 public void retractIntake()  {
-    if (DoubleSolenoid.Value.kForward == solenoid.get()){
-   }
+  //   if (DoubleSolenoid.Value.kForward == solenoid.get()){
+  //  }
   }
 }
