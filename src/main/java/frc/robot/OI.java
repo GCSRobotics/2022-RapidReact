@@ -14,6 +14,11 @@ public class OI {
     public OI() {
         DriverControl = new XboxController(Constants.DriveJoystick);
         OperatorControl = new XboxController(Constants.OperatorJoystick);
+        ButtonActionInit();
+    }
+
+    private void ButtonActionInit() {
+        DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intake))
     }
 
     public XboxController GetDriverControl() {
