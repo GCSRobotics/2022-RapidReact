@@ -28,11 +28,11 @@ public class LoadCargo extends CommandBase {
   @Override
   public void execute() {
     if(indexSub.CargoLoaded()){
-      indexSub.StopLowerIndex();
-      indexSub.StopUpperIndex();
+      indexSub.StopFrontIndex();
+      indexSub.StopBackIndex();
     } else {
-      indexSub.LowerIndexForward();
-      indexSub.UpperIndexForward();
+      indexSub.FrontIndexForward();
+      indexSub.BackIndexForward();
     }
     intakeSub.Forward();
   }

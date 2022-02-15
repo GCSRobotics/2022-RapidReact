@@ -34,10 +34,13 @@ public final class Constants {
 
     // Intake Constants
     public final static int IntakeMotor = 31;
+    public final static int IntakeExtendChannel = 32;
+    public final static int IntakeRetractChannel = 33;
+
     
 
     // Index Constants
-    public final static int UpperIndexMotor = 41;
-    public final static int LowerIndexMotor = 42;
+    public final static int FrontIndexMotor = 41;
+    public final static int BackIndexMotor = 42;
 
 }
