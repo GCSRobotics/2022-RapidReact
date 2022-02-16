@@ -16,15 +16,14 @@ import frc.robot.subsystems.DriveSub.DriveSubsystem;
 
 public class RobotContainer {
 
+  
+  // Subsystems
+  public static DriveSubsystem driveSub = new DriveSubsystem();
+  public static ShooterSub shootSub = new ShooterSub();
+  public static IntakeSub intakeSub = new IntakeSub();
+  public static IndexSub indexSub = new IndexSub();
   // Operator Interface
   private static OI oi = new OI();
-
-  // Subsystems
-  DriveSubsystem driveSub = new DriveSubsystem();
-  ShooterSub shootSub = new ShooterSub();
-  IntakeSub intakeSub = new IntakeSub();
-  IndexSub indexSub = new IndexSub();
-  // Commands
 
   // Robot Container Constructor
   public RobotContainer() {

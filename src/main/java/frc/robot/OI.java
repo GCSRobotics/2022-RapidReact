@@ -4,28 +4,40 @@
 
 package frc.robot;
 
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
+
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Intake.ExtendIntake;
+import frc.robot.commands.Intake.IntakeForward;
+import frc.robot.commands.Intake.IntakeReverse;
+import frc.robot.commands.Intake.RetractIntake;
+import frc.robot.controllers.BaseController;
+import frc.robot.controllers.ControllerType;
+import frc.robot.controllers.XBoxController;
 
 /** Add your docs here. */
 public class OI {
-    private XboxController DriverControl;
-    private XboxController OperatorControl;
+    private BaseController DriverControl;
+    private BaseController OperatorControl;
 
     public OI() {
-        DriverControl = new XboxController(Constants.DriveJoystick);
-        OperatorControl = new XboxController(Constants.OperatorJoystick);
+        DriverControl = BaseController.CreateInstance(ControllerType.XBox, Constants.DriveJoystick);
+        OperatorControl = BaseController.CreateInstance(ControllerType.XBox, Constants.OperatorJoystick);
         ButtonActionInit();
     }
 
     private void ButtonActionInit() {
-        DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intake))
-    }
+    DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
+    DriverControl.ButtonY.whenPressed(new ExtendIntake(RobotContainer.intakeSub));
+    DriverControl.ButtonR1.whenPressed(new IntakeForward(RobotContainer.intakeSub));
+    DriverControl.ButtonL1.whenPressed(new IntakeReverse(RobotContainer.intakeSub));
 
-    public XboxController GetDriverControl() {
+    }
+    public BaseController GetDriverControl() {
         return DriverControl;
     }
 
-    public XboxController GetOperatorControl() {
+    public BaseController GetOperatorControl() {
         return OperatorControl;
     }
 }

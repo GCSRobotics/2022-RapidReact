@@ -62,4 +62,8 @@ public abstract class BaseController extends Joystick {
     public void StopRumble() {
     }
 
+    public int getLeftTriggerAxis() {
+        return 0;
+    }
+
 }

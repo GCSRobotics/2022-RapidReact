@@ -20,7 +20,7 @@ public class IntakeSub extends SubsystemBase {
 
   public IntakeSub() {
     //addChild("IntakeMotor", IntakeMotor);
-    // addChild("solenoid", solenoid);
+    //addChild("solenoid", solenoid);
     // solenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
@@ -44,6 +44,7 @@ public class IntakeSub extends SubsystemBase {
   }
 
 public void extendIntake() {
+    // TODO: Add pneumatic 
     // if (DoubleSolenoid.Value.kForward == solenoid.get()){
     //   solenoid.toggle();
     // }
