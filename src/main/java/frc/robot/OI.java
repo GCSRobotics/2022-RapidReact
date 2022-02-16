@@ -5,22 +5,29 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.controllers.BaseController;
+import frc.robot.controllers.ControllerType;
 
 /** Add your docs here. */
 public class OI {
-    private XboxController DriverControl;
-    private XboxController OperatorControl;
+    private BaseController DriverControl;
+    private BaseController OperatorControl;
 
     public OI() {
-        DriverControl = new XboxController(Constants.DriveJoystick);
-        OperatorControl = new XboxController(Constants.OperatorJoystick);
+        DriverControl = BaseController.CreateInstance(ControllerType.XBox, Constants.DriveJoystick);
+        OperatorControl = BaseController.CreateInstance(ControllerType.XBox, Constants.OperatorJoystick);
+        ButtonActionInit();
     }
 
-    public XboxController GetDriverControl() {
+    private void ButtonActionInit() {
+        //DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intake));
+    }
+
+    public BaseController GetDriverControl() {
         return DriverControl;
     }
 
-    public XboxController GetOperatorControl() {
+    public BaseController GetOperatorControl() {
         return OperatorControl;
     }
 }
