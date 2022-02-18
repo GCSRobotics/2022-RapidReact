@@ -6,20 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.controllers.BaseController;
 import frc.robot.subsystems.DriveSub.DriveSubsystem;
 
 public class DriveWithController extends CommandBase {
   private final DriveSubsystem driveSubsystem;
-  private final XboxController driveController;
+  private final BaseController driveController;
 
   double m_speedMultiplier = 0.7;
   double m_speedMultiplierTurbo = 1.0;
   double m_rotationMultiplier = 0.6;
 
   /** Creates a new DriveWithController. */
-  public DriveWithController(DriveSubsystem subsystem, XboxController controller) {
+  public DriveWithController(DriveSubsystem subsystem, BaseController baseController) {
     driveSubsystem = subsystem;
-    driveController = controller;
+    driveController = baseController;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveSubsystem);
@@ -38,8 +39,8 @@ public class DriveWithController extends CommandBase {
       m_speedMultiplier = m_speedMultiplierTurbo;
     }
 
-    double forwardSpeed = driveController.getLeftY() * m_speedMultiplier;
-    double rotationSpeed = driveController.getRightX() * m_rotationMultiplier;
+    double forwardSpeed = driveController.GetAxis_LeftY() * m_speedMultiplier;
+    double rotationSpeed = driveController.GetAxis_RightX() * m_rotationMultiplier;
 
    driveSubsystem.arcadeDrive(rotationSpeed, forwardSpeed);
   }

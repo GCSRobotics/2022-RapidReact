@@ -4,9 +4,20 @@
 
 package frc.robot;
 
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
+
 import edu.wpi.first.wpilibj.XboxController;
+
 import frc.robot.controllers.BaseController;
 import frc.robot.controllers.ControllerType;
+import frc.robot.commands.Intake.ExtendIntake;
+import frc.robot.commands.Intake.IntakeForward;
+import frc.robot.commands.Intake.IntakeReverse;
+import frc.robot.commands.Intake.RetractIntake;
+import frc.robot.controllers.BaseController;
+import frc.robot.controllers.ControllerType;
+import frc.robot.controllers.XBoxController;
+
 
 /** Add your docs here. */
 public class OI {
@@ -20,7 +31,18 @@ public class OI {
     }
 
     private void ButtonActionInit() {
-        //DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intake));
+    DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
+    DriverControl.ButtonY.whenPressed(new ExtendIntake(RobotContainer.intakeSub));
+    DriverControl.ButtonR1.whenPressed(new IntakeForward(RobotContainer.intakeSub));
+    DriverControl.ButtonL1.whenPressed(new IntakeReverse(RobotContainer.intakeSub));
+    
+
+
+    // Operator buttons.
+    OperatorControl.ButtonY.whenPressed(new ExtendIntake(RobotContainer.intakeSub));
+    OperatorControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
+    OperatorControl.ButtonR1.whenPressed(new IntakeForward(RobotContainer.intakeSub));
+    OperatorControl.ButtonL1.whenPressed(new IntakeReverse(RobotContainer.intakeSub));
     }
 
     public BaseController GetDriverControl() {
