@@ -7,8 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.DriveWithController;
-import frc.robot.commands.Auto.AutonomousDistance;
+import frc.robot.commands.Auto.TwoBallCargoScore;
+import frc.robot.commands.DriveSub.DriveWithController;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
@@ -85,7 +85,7 @@ public class RobotContainer {
 
         //return new SlalomPath(drive);
 
-        return new AutonomousDistance(driveSub , shootSub, indexSub, intakeSub);
+        return new TwoBallCargoScore(driveSub , shootSub, indexSub, intakeSub);
 
       }
 }

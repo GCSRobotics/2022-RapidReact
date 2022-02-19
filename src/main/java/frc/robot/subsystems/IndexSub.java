@@ -4,46 +4,52 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IndexSub extends SubsystemBase {
   /** Creates a new IndexSub. */
-  private CANSparkMax FrontIndexMotor = new CANSparkMax(Constants.FrontIndexMotor, MotorType.kBrushless);
-  private CANSparkMax BackIndexMotor = new CANSparkMax(Constants.BackIndexMotor, MotorType.kBrushless);
+  private TalonFX FrontIndexMotor = new TalonFX(Constants.FrontIndexMotor);
+  private TalonFX BackIndexMotor = new TalonFX(Constants.BackIndexMotor);
   public IndexSub() {}
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
-
-  public void FrontIndexForward(){
-    FrontIndexMotor.set(.75);
+  public void RunIndex(){
+    FrontIndexForward();
+    BackIndexForward();
   }
-  public void BackIndexForward(){
-    BackIndexMotor.set(.75);
-  }
-  public void FrontIndexReverse(){
-    FrontIndexMotor.set(-.75);
-  }
-  public void BackIndexReverse(){
-    BackIndexMotor.set(-.75);
-  }
-  public void StopFrontIndex(){
-    FrontIndexMotor.set(0.0);
-  }
-  public void StopBackIndex(){
-    BackIndexMotor.set(0.0);
+  public void ReverseIndex(){
+    FrontIndexReverse();
+    BackIndexReverse();
   }
   public void StopIndex(){
     StopFrontIndex();
     StopBackIndex();
   }
-
+  public void FrontIndexForward(){
+    FrontIndexMotor.set(ControlMode.PercentOutput,.75);
+  }
+  public void BackIndexForward(){
+    BackIndexMotor.set(ControlMode.PercentOutput,.75);
+  }
+  public void FrontIndexReverse(){
+    FrontIndexMotor.set(ControlMode.PercentOutput,-.75);
+  }
+  public void BackIndexReverse(){
+    BackIndexMotor.set(ControlMode.PercentOutput,-.75);
+  }
+  public void StopFrontIndex(){
+    FrontIndexMotor.set(ControlMode.PercentOutput,0.0);
+  }
+  public void StopBackIndex(){
+    BackIndexMotor.set(ControlMode.PercentOutput,0.0);
+  }
+  
   public boolean CargoLoaded(){
     //TODO: Add SensorLogic
     return true;
