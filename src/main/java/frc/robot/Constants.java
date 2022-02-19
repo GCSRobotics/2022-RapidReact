@@ -26,16 +26,16 @@ public final class Constants {
 
 
     // Shooter Constants
-    public final static int TopShootingMotor = 21;
-    public final static int BottomShootingMotor = 22;
+    public final static int ShootingMotor = 21;
+    public final static int TurretMotor = 22;
     public static final double TopShooterConversionFactor = 0;
     public static final double BottomShooterConversionFactor = 0;
 
 
     // Intake Constants
     public final static int IntakeMotor = 31;
-    // public final static int IntakeExtendChannel = 16;
-    // public final static int IntakeRetractChannel = 17;
+    public final static int IntakeExtendChannel = 0;
+    public final static int IntakeRetractChannel = 1;
 
     
 
