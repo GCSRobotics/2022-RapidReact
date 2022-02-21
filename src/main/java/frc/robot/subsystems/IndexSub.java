@@ -21,7 +21,7 @@ public class IndexSub extends SubsystemBase {
   }
   public void RunIndex(){
     FrontIndexForward();
-    BackIndexForward();
+    BackIndexForward(); 
   }
   public void ReverseIndex(){
     FrontIndexReverse();
