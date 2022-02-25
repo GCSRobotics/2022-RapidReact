@@ -4,17 +4,20 @@
 
 package frc.robot.subsystems.DriveSub;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 
 public class DriveSubsystem extends SubsystemBase {
   // Define Motors
@@ -31,7 +34,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final DifferentialDrive robotDrive;
 
-  private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
+ // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
+   // Gyro Definitions
+   AHRS ahrs;
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -42,25 +47,41 @@ public class DriveSubsystem extends SubsystemBase {
     leftEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
     rightEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
 
-    gyro.calibrate();
+    //gyro.calibrate();
+    CreateNavXObject();
     resetEncoders();
 
     SmartDashboard.putNumber("LeftEncoder",leftEncoder.getPosition());
     SmartDashboard.putNumber("RightEncoder",rightEncoder.getPosition());
-    SmartDashboard.putNumber("Gyro", gyro.getAngle());
-
-
+    //SmartDashboard.putNumber("Gyro", gyro.getAngle());
+    SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
+    SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
 
     robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 
   }
-
+  private void CreateNavXObject() {
+    try {
+      /* Communicate w/navX-MXP via the MXP SPI Bus. */
+      /* Alternatively: I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB */
+      /*
+       * See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for
+       * details.
+       */
+      ahrs = new AHRS(SerialPort.Port.kMXP);
+    } catch (RuntimeException ex) {
+      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+    }
+  }
   @Override
   public void periodic() {
     SmartDashboard.putNumber("LeftEncoder",leftEncoder.getPosition());
     SmartDashboard.putNumber("RightEncoder",rightEncoder.getPosition());
-    SmartDashboard.putNumber("Gyro", gyro.getAngle());
+    // SmartDashboard.putNumber("Gyro", gyro.getAngle());
     System.out.print(leftEncoder.getPosition());
+    SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
+    SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
+
 
     // This method will be called once per scheduler run
   }
@@ -107,11 +128,13 @@ public class DriveSubsystem extends SubsystemBase {
   // Gyro - Methods to get Gyro Readings
   // ********************************************
   public double getGyroAngle() {
-    return gyro.getAngle();
+    // return gyro.getAngle();
+    return ahrs.getAngle();
   }
 
   public double getGyroRate() {
-    return gyro.getRate();
+    // return gyro.getRate();
+    return ahrs.getRate();
   }
 
   public void reset() {
