@@ -35,12 +35,12 @@ public class ShootCargo extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSub.RunShooter(0.7);
+    shooterSub.RunShooter(0.75);
     // if time is run than 2 seconds to turn on the index
     long timePassedMil = (new Date()).getTime() - initime.getTime();
-    if (timePassedMil >500) {
+    if (timePassedMil >1000) {
       indexSub.BackIndexForward();
-   
+      indexSub.FrontIndexForward();
     }
   }
   
@@ -49,6 +49,8 @@ public class ShootCargo extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSub.StopShooter();
+    indexSub.StopFrontIndex();
+    indexSub.StopBackIndex();
   }
 
   // Returns true when the command should end.

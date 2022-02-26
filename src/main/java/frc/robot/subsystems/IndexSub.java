@@ -32,10 +32,10 @@ public class IndexSub extends SubsystemBase {
     StopBackIndex();
   }
   public void FrontIndexForward(){
-    FrontIndexMotor.set(ControlMode.PercentOutput,.75);
+    FrontIndexMotor.set(ControlMode.PercentOutput,.95);
   }
   public void BackIndexForward(){
-    BackIndexMotor.set(ControlMode.PercentOutput,-.75);
+    BackIndexMotor.set(ControlMode.PercentOutput,-.95);
   }
   public void FrontIndexReverse(){
     FrontIndexMotor.set(ControlMode.PercentOutput,-.75);

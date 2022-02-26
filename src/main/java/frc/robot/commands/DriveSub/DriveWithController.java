@@ -42,7 +42,7 @@ public class DriveWithController extends CommandBase {
     double forwardSpeed = driveController.GetAxis_LeftY() * m_speedMultiplier;
     double rotationSpeed = driveController.GetAxis_RightX() * m_rotationMultiplier;
 
-   driveSubsystem.arcadeDrive(rotationSpeed, forwardSpeed);
+   driveSubsystem.arcadeDrive(forwardSpeed,-rotationSpeed);
   }
 
   // Called once the command ends or is interrupted.

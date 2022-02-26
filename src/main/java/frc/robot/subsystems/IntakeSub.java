@@ -30,11 +30,11 @@ public class IntakeSub extends SubsystemBase {
   }
 
   public void Forward() {
-    IntakeMotor.set(.75);
+    IntakeMotor.set(0.6);
   }
 
   public void Reverse() {
-    IntakeMotor.set(-.75);
+    IntakeMotor.set(-.6);
 
   }
 

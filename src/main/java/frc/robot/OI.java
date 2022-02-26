@@ -31,11 +31,12 @@ public class OI {
 
         // Operator buttons.
         OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
-        OperatorControl.ButtonR2.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
-        OperatorControl.ButtonL1.whenHeld(new RunIndex(RobotContainer.indexSub));
-        OperatorControl.ButtonL2.whileHeld(new ReverseIndex(RobotContainer.indexSub));
+        OperatorControl.ButtonL1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
+        //  OperatorControl.ButtonL1.whenHeld(new RunIndex(RobotContainer.indexSub));
+        //  OperatorControl.ButtonR1.whenHeld(new ReverseIndex(RobotContainer.indexSub));
         OperatorControl.ButtonB
-                .whenPressed(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub).withTimeout(5));
+                .whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
+
     }
 
     public BaseController GetDriverControl() {

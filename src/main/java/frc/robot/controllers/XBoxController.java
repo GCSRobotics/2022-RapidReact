@@ -18,7 +18,7 @@ public class XBoxController extends BaseController {
      */
     private enum buttons {
         A(1), B(2), X(3), Y(4), 
-        L1(5), R1(6), 
+        L1(5), R1(6), R2(3), L2(2),
         Option(7), Map(8), 
         LStick(9), RStick(10);
 
