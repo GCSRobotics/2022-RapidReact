@@ -34,7 +34,7 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
 
     double waitTime = 0.2;
     addCommands(
-     new ShootCargo(index, shooter),
+     new ShootCargo(index, shooter),withTimeout(1.5),
      new ExtendIntake(intake),
      new IntakeForward(intake),
      new IndexForward(index),
