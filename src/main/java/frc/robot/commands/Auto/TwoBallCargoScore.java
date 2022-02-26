@@ -4,7 +4,8 @@
 
 package frc.robot.commands.Auto;
 
-import frc.robot.commands.Auto.DriveDistance;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.GroupCommands.StopAll;
 import frc.robot.commands.IndexSub.IndexForward;
@@ -14,8 +15,6 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class TwoBallCargoScore extends SequentialCommandGroup {
 

@@ -4,7 +4,6 @@
 
 package frc.robot.commands.GroupCommands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.IntakeSub.RetractIntake;
 import frc.robot.subsystems.IndexSub;

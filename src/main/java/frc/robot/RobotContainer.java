@@ -6,8 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.Auto.TwoBallCargoScore;
 import frc.robot.commands.DriveSub.DriveWithController;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;
@@ -16,7 +14,6 @@ import frc.robot.subsystems.ShooterSub;
 
 public class RobotContainer {
 
-  
   // Subsystems
   public static DriveSubsystem driveSub = new DriveSubsystem();
   public static ShooterSub shootSub = new ShooterSub();
@@ -34,7 +31,6 @@ public class RobotContainer {
   public void setTeleopDefaultCommands() {
     driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
   }
-
 
   //
   /**
@@ -55,39 +51,37 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-  //   return m_autoCommand;
+  // // An ExampleCommand will run in autonomous
+  // return m_autoCommand;
   // }
 
-      // Autonomous Commands
-      // public Command GetAutonomousCommand() {
-      //   double WaitTime = 0.1;
-      //   double StraightSpeed = 0.40;
-      //   double TurnSpeed = 0.4;
+  // Autonomous Commands
+  // public Command GetAutonomousCommand() {
+  // double WaitTime = 0.1;
+  // double StraightSpeed = 0.40;
+  // double TurnSpeed = 0.4;
 
-      //   // return new AutonomousDistance(drive);
+  // // return new AutonomousDistance(drive);
 
-      //   // return new SequentialCommandGroup(
-      //   //     new DriveDistance(StraightSpeed, 150, drive),
-      //   //     new WaitCommand(WaitTime), 
-      //   //     new FindPowerCellA(drive));
+  // // return new SequentialCommandGroup(
+  // // new DriveDistance(StraightSpeed, 150, drive),
+  // // new WaitCommand(WaitTime),
+  // // new FindPowerCellA(drive));
 
-      //   // return new SequentialCommandGroup(
-      //   //     new DriveDistance(StraightSpeed, 162, drive),
-      //   //     new WaitCommand(WaitTime), 
-      //   //     new TurnDegreesGyro(TurnSpeed, -90, drive),
-      //   //     new WaitCommand(WaitTime), 
-      //   //     new FindPowerCellB(drive));
+  // // return new SequentialCommandGroup(
+  // // new DriveDistance(StraightSpeed, 162, drive),
+  // // new WaitCommand(WaitTime),
+  // // new TurnDegreesGyro(TurnSpeed, -90, drive),
+  // // new WaitCommand(WaitTime),
+  // // new FindPowerCellB(drive));
 
-      //   //return new BarrelRacing(drive);
+  // //return new BarrelRacing(drive);
 
-      //    //return new BouncePath(drive);
+  // //return new BouncePath(drive);
 
-      //   //return new SlalomPath(drive);
+  // //return new SlalomPath(drive);
 
-      //   // return new TwoBallCargoScore(driveSub , shootSub, indexSub, intakeSub);
+  // // return new TwoBallCargoScore(driveSub , shootSub, indexSub, intakeSub);
 
-      // }
+  // }
 }
-
-
