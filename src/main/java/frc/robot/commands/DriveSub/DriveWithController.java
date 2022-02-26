@@ -13,6 +13,7 @@ public class DriveWithController extends CommandBase {
   private final BaseController driveController;
 
   double m_speedMultiplier = 0.7;
+  double m_speedMutiplierNormal = 0.7;
   double m_speedMultiplierTurbo = 1.0;
   double m_rotationMultiplier = 0.6;
 
@@ -34,8 +35,10 @@ public class DriveWithController extends CommandBase {
   @Override
   public void execute() {
     // Use Left Trigger to determine if Turbo Mode is on
-    if (driveController.getLeftTriggerAxis() != 0) {
+    if (driveController.ButtonL1.get()) {
       m_speedMultiplier = m_speedMultiplierTurbo;
+    } else {
+      m_speedMultiplier = m_speedMutiplierNormal;
     }
 
     double forwardSpeed = driveController.GetAxis_LeftY() * m_speedMultiplier;

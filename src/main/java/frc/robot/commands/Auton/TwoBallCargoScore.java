@@ -4,11 +4,13 @@
 
 package frc.robot.commands.Auton;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.GroupCommands.StopAll;
 import frc.robot.commands.IndexSub.IndexForward;
+import frc.robot.commands.IndexSub.IndexReverse;
 import frc.robot.commands.IntakeSub.ExtendIntake;
 import frc.robot.commands.IntakeSub.IntakeForward;
 import frc.robot.subsystems.DriveSubsystem;
@@ -35,10 +37,12 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
     double waitTime = 0.2;
     addCommands(
      new ShootCargo(index, shooter),withTimeout(1.5),
-     new ExtendIntake(intake),
-     new IntakeForward(intake),
-     new IndexForward(index),
-     new DriveDistance(driveSpeed, 30, drivetrain).andThen(new WaitCommand(waitTime)),
+     new ExtendIntake(intake).withTimeout(0.2),
+     new ParallelCommandGroup(
+            new IntakeForward(intake),
+            new IndexForward(index),
+            new DriveDistance(driveSpeed, 30, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(3),
+     new IndexReverse(index).withTimeout(0.2),
      new ShootCargo(index, shooter).withTimeout(1.5),
      new DriveDistance(driveSpeed, 12, drivetrain),
      new StopAll(shooter, index, intake)
