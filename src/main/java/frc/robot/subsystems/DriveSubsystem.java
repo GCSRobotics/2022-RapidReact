@@ -38,12 +38,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    leftMotorGroup.setInverted(true);
+    // leftMotorGroup.setInverted(true);
+    leftFrontMotor.setInverted(true);
+    leftRearMotor.setInverted(true);
 
     leftEncoder = leftFrontMotor.getEncoder();
     rightEncoder = rightFrontMotor.getEncoder();
     leftEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
     rightEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
+
 
     //gyro.calibrate();
     CreateNavXObject();
