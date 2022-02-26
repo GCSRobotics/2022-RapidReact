@@ -2,15 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.indexSub;
+package frc.robot.commands.IndexSub;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSub;
 
-public class ReverseIndex extends CommandBase {
+public class IndexReverse extends CommandBase {
   private final IndexSub indexSub;
   /** Creates a new ReverseIndex. */
-  public ReverseIndex(IndexSub subsystem) {
+  public IndexReverse(IndexSub subsystem) {
     indexSub = subsystem;
   }
 

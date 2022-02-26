@@ -7,7 +7,7 @@ package frc.robot.commands.DriveSub;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.controllers.BaseController;
-import frc.robot.subsystems.DriveSub.DriveSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveWithController extends CommandBase {
   private final DriveSubsystem driveSubsystem;

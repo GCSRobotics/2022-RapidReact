@@ -6,13 +6,13 @@ package frc.robot;
 
 import frc.robot.controllers.BaseController;
 import frc.robot.controllers.ControllerType;
-import frc.robot.commands.Intake.ExtendIntake;
-import frc.robot.commands.Intake.IntakeForward;
-import frc.robot.commands.Intake.IntakeReverse;
-import frc.robot.commands.Intake.RetractIntake;
-import frc.robot.commands.groupcommands.ShootCargo;
-import frc.robot.commands.indexSub.ReverseIndex;
-import frc.robot.commands.indexSub.RunIndex;
+import frc.robot.commands.GroupCommands.ShootCargo;
+import frc.robot.commands.IndexSub.IndexReverse;
+import frc.robot.commands.IntakeSub.ExtendIntake;
+import frc.robot.commands.IntakeSub.IntakeForward;
+import frc.robot.commands.IntakeSub.IntakeReverse;
+import frc.robot.commands.IntakeSub.RetractIntake;
+import frc.robot.commands.IndexSub.IndexForward;
 
 /** Add your docs here. */
 public class OI {
@@ -26,17 +26,17 @@ public class OI {
     }
 
     private void ButtonActionInit() {
-        DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
         DriverControl.ButtonY.whenPressed(new ExtendIntake(RobotContainer.intakeSub));
+        DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
 
         // Operator buttons.
-        OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
-        OperatorControl.ButtonL1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
-        //  OperatorControl.ButtonL1.whenHeld(new RunIndex(RobotContainer.indexSub));
-        //  OperatorControl.ButtonR1.whenHeld(new ReverseIndex(RobotContainer.indexSub));
-        OperatorControl.ButtonB
-                .whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
+        OperatorControl.ButtonR2.whenHeld(new IntakeForward(RobotContainer.intakeSub));
+        OperatorControl.ButtonR1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
 
+        OperatorControl.ButtonL2.whenHeld(new IndexForward(RobotContainer.indexSub));
+        OperatorControl.ButtonL1.whenHeld(new IndexReverse(RobotContainer.indexSub));
+
+        OperatorControl.ButtonB.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
     }
 
     public BaseController GetDriverControl() {

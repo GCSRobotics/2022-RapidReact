@@ -2,17 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.indexSub;
+package frc.robot.commands.IntakeSub;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IndexSub;
+import frc.robot.subsystems.IntakeSub;
 
-public class RunIndex extends CommandBase {
-  private final IndexSub indexSub;
-
-  /** Creates a new RunIndex. */
-  public RunIndex(IndexSub subsystem) {
-      indexSub = subsystem;
+public class RetractIntake extends CommandBase {
+  IntakeSub intakeSub;
+  /** Creates a new RetractIntake. */
+  public RetractIntake(IntakeSub intake) {
+    intakeSub = intake;
+    addRequirements(intakeSub);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -22,18 +23,16 @@ public class RunIndex extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    indexSub.RunIndex();
+      intakeSub.retractIntake();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    indexSub.StopIndex();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

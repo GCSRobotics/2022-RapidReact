@@ -2,18 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Intake;
+package frc.robot.commands.IntakeSub;
+
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.controllers.BaseController;
 import frc.robot.subsystems.IntakeSub;
 
-public class IntakeReverse extends CommandBase {
+public class IntakeForward extends CommandBase {
   IntakeSub intakeSub;
-  /** Creates a new IntakeReverse. */
-  public IntakeReverse(IntakeSub intake) {
+
+  /** Creates a new IntakeForward. */
+  public IntakeForward(IntakeSub intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     intakeSub = intake;
-    addRequirements(intakeSub);
+    addRequirements(intakeSub); 
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +27,7 @@ public class IntakeReverse extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSub.Reverse();
+    intakeSub.Forward();
   }
 
   // Called once the command ends or is interrupted.

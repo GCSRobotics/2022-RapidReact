@@ -5,13 +5,12 @@
 package frc.robot.commands.Auto;
 
 import frc.robot.commands.Auto.DriveDistance;
-import frc.robot.commands.DriveSub.TurnDegreesGyro;
-import frc.robot.commands.Intake.ExtendIntake;
-import frc.robot.commands.Intake.IntakeForward;
-import frc.robot.commands.groupcommands.ShootCargo;
-import frc.robot.commands.groupcommands.StopAll;
-import frc.robot.commands.indexSub.RunIndex;
-import frc.robot.subsystems.DriveSub.DriveSubsystem;
+import frc.robot.commands.GroupCommands.ShootCargo;
+import frc.robot.commands.GroupCommands.StopAll;
+import frc.robot.commands.IndexSub.IndexForward;
+import frc.robot.commands.IntakeSub.ExtendIntake;
+import frc.robot.commands.IntakeSub.IntakeForward;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
@@ -39,7 +38,7 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
      new ShootCargo(index, shooter),
      new ExtendIntake(intake),
      new IntakeForward(intake),
-     new RunIndex(index),
+     new IndexForward(index),
      new DriveDistance(driveSpeed, 48, drivetrain).andThen(new WaitCommand(waitTime)),
      new ShootCargo(index, shooter).withTimeout(1.5),
      new DriveDistance(driveSpeed, 12, drivetrain),
