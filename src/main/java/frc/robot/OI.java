@@ -6,12 +6,12 @@ package frc.robot;
 
 import frc.robot.controllers.BaseController;
 import frc.robot.controllers.ControllerType;
-import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.IndexSub.IndexReverse;
 import frc.robot.commands.IntakeSub.ExtendIntake;
 import frc.robot.commands.IntakeSub.IntakeForward;
 import frc.robot.commands.IntakeSub.IntakeReverse;
 import frc.robot.commands.IntakeSub.RetractIntake;
+import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.IndexSub.IndexForward;
 
 /** Add your docs here. */
