@@ -38,7 +38,7 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
      new ExtendIntake(intake),
      new IntakeForward(intake),
      new IndexForward(index),
-     new DriveDistance(driveSpeed, 48, drivetrain).andThen(new WaitCommand(waitTime)),
+     new DriveDistance(driveSpeed, 30, drivetrain).andThen(new WaitCommand(waitTime)),
      new ShootCargo(index, shooter).withTimeout(1.5),
      new DriveDistance(driveSpeed, 12, drivetrain),
      new StopAll(shooter, index, intake)

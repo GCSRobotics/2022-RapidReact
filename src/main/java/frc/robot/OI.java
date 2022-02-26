@@ -30,11 +30,11 @@ public class OI {
         DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
 
         // Operator buttons.
-        OperatorControl.ButtonR2.whenHeld(new IntakeForward(RobotContainer.intakeSub));
-        OperatorControl.ButtonR1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
+        OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
+        OperatorControl.ButtonL1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
 
-        OperatorControl.ButtonL2.whenHeld(new IndexForward(RobotContainer.indexSub));
-        OperatorControl.ButtonL1.whenHeld(new IndexReverse(RobotContainer.indexSub));
+        OperatorControl.ButtonA.whenHeld(new IndexForward(RobotContainer.indexSub));
+        OperatorControl.ButtonX.whenHeld(new IndexReverse(RobotContainer.indexSub));
 
         OperatorControl.ButtonB.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
     }

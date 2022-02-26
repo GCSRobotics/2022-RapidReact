@@ -8,6 +8,7 @@
 package frc.robot.controllers;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * Handle input from PS4 controllers connected to the Driver Station.
@@ -40,8 +41,6 @@ public class XBoxController extends BaseController {
         ButtonY = new JoystickButton(this, buttons.Y.value);
         ButtonL1 = new JoystickButton(this, buttons.L1.value);
         ButtonR1 = new JoystickButton(this, buttons.R1.value);
-        ButtonL2 = new JoystickButton(this, buttons.L2.value);
-        ButtonR2 = new JoystickButton(this, buttons.R2.value);
         ButtonStickL = new JoystickButton(this, buttons.LStick.value);
         ButtonStickR = new JoystickButton(this, buttons.RStick.value);
         ButtonOptionL = new JoystickButton(this, buttons.Option.value);
