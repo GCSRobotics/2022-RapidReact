@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -26,6 +27,7 @@ public class RobotContainer {
 
   // Robot Container Constructor
   public RobotContainer() {
+    CameraServer.startAutomaticCapture();
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -59,31 +61,31 @@ public class RobotContainer {
 
   // Autonomous Commands
   public CommandBase GetAutonomousCommand() {
-  // double WaitTime = 0.1;
-  // double StraightSpeed = 0.40;
-  // double TurnSpeed = 0.4;
+    // double WaitTime = 0.1;
+    // double StraightSpeed = 0.40;
+    // double TurnSpeed = 0.4;
 
-  // return new AutonomousDistance(drive);
+    // return new AutonomousDistance(drive);
 
-  // return new SequentialCommandGroup(
-  // new DriveDistance(StraightSpeed, 150, drive),
-  // new WaitCommand(WaitTime),
-  // new FindPowerCellA(drive));
+    // return new SequentialCommandGroup(
+    // new DriveDistance(StraightSpeed, 150, drive),
+    // new WaitCommand(WaitTime),
+    // new FindPowerCellA(drive));
 
-  // return new SequentialCommandGroup(
-  // new DriveDistance(StraightSpeed, 162, drive),
-  // new WaitCommand(WaitTime),
-  // new TurnDegreesGyro(TurnSpeed, -90, drive),
-  // new WaitCommand(WaitTime),
-  // new FindPowerCellB(drive));
+    // return new SequentialCommandGroup(
+    // new DriveDistance(StraightSpeed, 162, drive),
+    // new WaitCommand(WaitTime),
+    // new TurnDegreesGyro(TurnSpeed, -90, drive),
+    // new WaitCommand(WaitTime),
+    // new FindPowerCellB(drive));
 
-  //return new BarrelRacing(drive);
+    // return new BarrelRacing(drive);
 
-  //return new BouncePath(drive);
+    // return new BouncePath(drive);
 
-  //return new SlalomPath(drive);
+    // return new SlalomPath(drive);
 
-  return new TwoBallCargoScore(driveSub , shootSub, indexSub, intakeSub);
+    return new TwoBallCargoScore(driveSub, shootSub, indexSub, intakeSub);
 
   }
 }
