@@ -23,6 +23,10 @@ public class IndexSub extends SubsystemBase {
     FrontIndexForward();
     BackIndexForward(); 
   }
+  public void RunIndex(double speed){
+    FrontIndexForward(speed);
+    BackIndexForward(speed); 
+  }
   public void RunIndexSlow(){
     FrontIndexForwardSlow();
     BackIndexForwardSlow(); 
@@ -40,6 +44,12 @@ public class IndexSub extends SubsystemBase {
   }
   public void BackIndexForward(){
     BackIndexMotor.set(ControlMode.PercentOutput,-.95);
+  }
+  public void FrontIndexForward(double speed){
+    FrontIndexMotor.set(ControlMode.PercentOutput,speed);
+  }
+  public void BackIndexForward(double speed){
+    BackIndexMotor.set(ControlMode.PercentOutput,-speed);
   }
   public void FrontIndexForwardSlow(){
     FrontIndexMotor.set(ControlMode.PercentOutput,.20);

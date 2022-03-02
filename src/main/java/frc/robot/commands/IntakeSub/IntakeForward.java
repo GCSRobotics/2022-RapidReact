@@ -4,27 +4,42 @@
 
 package frc.robot.commands.IntakeSub;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSub;
 
 public class IntakeForward extends CommandBase {
   IntakeSub intakeSub;
+  DoubleSupplier GetAxisValue;
 
   /** Creates a new IntakeForward. */
   public IntakeForward(IntakeSub intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     intakeSub = intake;
-    addRequirements(intakeSub); 
+    addRequirements(intakeSub);
+  }
+
+  public IntakeForward(IntakeSub intake, DoubleSupplier getAxisValue) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    intakeSub = intake;
+    GetAxisValue = getAxisValue;
+    addRequirements(intakeSub);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intakeSub.Forward();
+    if (GetAxisValue != null) {
+      intakeSub.Forward(GetAxisValue.getAsDouble());
+    } else {
+      intakeSub.Forward();
+    }
   }
 
   // Called once the command ends or is interrupted.

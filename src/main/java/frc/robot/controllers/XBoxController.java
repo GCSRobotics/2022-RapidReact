@@ -7,6 +7,7 @@
 
 package frc.robot.controllers;
 
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -19,7 +20,7 @@ public class XBoxController extends BaseController {
      */
     private enum buttons {
         A(1), B(2), X(3), Y(4), 
-        L1(5), R1(6), R2(3), L2(2),
+        L1(5), R1(6),
         Option(7), Map(8), 
         LStick(9), RStick(10);
 
@@ -45,6 +46,9 @@ public class XBoxController extends BaseController {
         ButtonStickR = new JoystickButton(this, buttons.RStick.value);
         ButtonOptionL = new JoystickButton(this, buttons.Option.value);
         ButtonOptionR = new JoystickButton(this, buttons.Map.value);
+
+        ButtonL2 = new Button(() -> this.getRawAxis(2) >= 0.2);
+        ButtonR2 = new Button(() -> this.getRawAxis(3) >= 0.2);
     }
 
     public double GetAxis_LeftX() {
