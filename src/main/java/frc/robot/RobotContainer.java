@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.Auton.TwoBallCargoScore;
 import frc.robot.commands.DriveSub.DriveWithController;
+import frc.robot.commands.IndexSub.IndexAutomatic;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
@@ -27,13 +28,18 @@ public class RobotContainer {
 
   // Robot Container Constructor
   public RobotContainer() {
+    //Bring up the default camera server for the RIO camera
     CameraServer.startAutomaticCapture();
+    
     // Configure the button bindings
     configureButtonBindings();
   }
 
   public void setTeleopDefaultCommands() {
     driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
+    
+    //Use a default command to allow the sensors to turn on/off the index motors.
+    indexSub.setDefaultCommand(new IndexAutomatic(indexSub));
   }
 
   //

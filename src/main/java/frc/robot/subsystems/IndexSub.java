@@ -6,18 +6,39 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.Rev2mDistanceSensor;
+import com.revrobotics.Rev2mDistanceSensor.Port;
+import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
+import com.revrobotics.Rev2mDistanceSensor.Unit;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IndexSub extends SubsystemBase {
-  /** Creates a new IndexSub. */
   private TalonFX FrontIndexMotor = new TalonFX(Constants.FrontIndexMotor);
   private TalonFX BackIndexMotor = new TalonFX(Constants.BackIndexMotor);
-  public IndexSub() {}
+
+  private Rev2mDistanceSensor TopDistSensor;
+  private Rev2mDistanceSensor BottomDistSensor;
+
+  /** Creates a new IndexSub. */
+  public IndexSub() {
+    //Define the distance sensors using inches and a highspeed profile (slightly less accurate but speed may be important for this)
+    TopDistSensor = new Rev2mDistanceSensor(Port.kMXP, Unit.kInches, RangeProfile.kHighSpeed);
+    BottomDistSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kHighSpeed);
+    TopDistSensor.setAutomaticMode(true);
+    BottomDistSensor.setAutomaticMode(true);
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("Top Range Valid", TopDistSensor.isRangeValid());
+    SmartDashboard.putNumber("Top Range Inches", TopDistSensor.getRange());
+    SmartDashboard.putBoolean("Bottom Range Valid", BottomDistSensor.isRangeValid());
+    SmartDashboard.putNumber("Bottom Range Inches", BottomDistSensor.getRange());
+
   }
   public void RunIndex(){
     FrontIndexForward();
@@ -30,6 +51,10 @@ public class IndexSub extends SubsystemBase {
   public void RunIndexSlow(){
     FrontIndexForwardSlow();
     BackIndexForwardSlow(); 
+  }
+  public void RunIndexSlow(double speed){
+    FrontIndexForward(speed);
+    BackIndexForward(speed); 
   }
   public void ReverseIndex(){
     FrontIndexReverse();
@@ -57,7 +82,6 @@ public class IndexSub extends SubsystemBase {
   public void BackIndexForwardSlow(){
     BackIndexMotor.set(ControlMode.PercentOutput,-.20);
   }
-
   public void FrontIndexReverse(){
     FrontIndexMotor.set(ControlMode.PercentOutput,-.75);
   }
@@ -71,11 +95,15 @@ public class IndexSub extends SubsystemBase {
     BackIndexMotor.set(ControlMode.PercentOutput,0.0);
   }
   
-  public boolean CargoLoaded(){
-    //TODO: Add SensorLogic
-    return true;
+  public boolean CargoIndexed(){
+    // Range is setup for inches
+    return TopDistSensor.isRangeValid() && TopDistSensor.GetRange() <= 5.0;
   }
 
-public void indexBall() {
-}
+  public boolean CargoIncoming(){
+    return BottomDistSensor.isRangeValid() && BottomDistSensor.GetRange() <= 9.0;
+  }
+
+  public void indexBall() {
+  }
 }
