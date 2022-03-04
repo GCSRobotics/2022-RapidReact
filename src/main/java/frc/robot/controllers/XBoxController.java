@@ -9,7 +9,6 @@ package frc.robot.controllers;
 
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * Handle input from PS4 controllers connected to the Driver Station.

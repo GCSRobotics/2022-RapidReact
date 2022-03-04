@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -19,8 +18,8 @@ public class ShooterSub extends SubsystemBase {
   /** Creates a new ShooterSub. */
   private TalonFX ShootingMotor = new TalonFX (Constants.ShootingMotor);
   // private CANSparkMax TurretMotor= new CANSparkMax(Constants.TurretMotor,MotorType.kBrushless);
-  private RelativeEncoder ShootingEncoder;
-  private RelativeEncoder TurretEncoder;
+  // private RelativeEncoder ShootingEncoder;
+  // private RelativeEncoder TurretEncoder;
   private NetworkTable table;
   
   public ShooterSub(){

@@ -5,7 +5,6 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.GroupCommands.ShootCargo;
@@ -33,7 +32,6 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
     m_drive = drivetrain;
 
     double driveSpeed = 0.40;
-    double turnSpeed = 0.45;
 
     double waitTime = 0.2;
     addCommands(
