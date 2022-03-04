@@ -20,6 +20,8 @@ public class IndexAutomatic extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    loading = false;
+    indexSub.StopIndex();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +43,8 @@ public class IndexAutomatic extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    loading = false;
+    indexSub.StopIndex();
   }
 
   // Returns true when the command should end.
