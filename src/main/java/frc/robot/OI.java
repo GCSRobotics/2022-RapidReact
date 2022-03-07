@@ -11,7 +11,9 @@ import frc.robot.commands.IntakeSub.ExtendIntake;
 import frc.robot.commands.IntakeSub.IntakeForward;
 import frc.robot.commands.IntakeSub.IntakeReverse;
 import frc.robot.commands.IntakeSub.RetractIntake;
+import frc.robot.commands.ClimbSub.*;
 import frc.robot.commands.GroupCommands.ShootCargo;
+import frc.robot.commands.GroupCommands.ShootCargoTwo;
 import frc.robot.commands.IndexSub.IndexForward;
 
 /** Add your docs here. */
@@ -28,6 +30,13 @@ public class OI {
     private void ButtonActionInit() {
         DriverControl.ButtonY.whenPressed(new ExtendIntake(RobotContainer.intakeSub));
         DriverControl.ButtonA.whenPressed(new RetractIntake(RobotContainer.intakeSub));
+        
+        //Climb Controls
+        DriverControl.DPadUp.whenHeld(new ExtendClimb(RobotContainer.climbSub));
+        DriverControl.DPadRight.whenPressed(new ClimbOut(RobotContainer.climbSub));
+        DriverControl.DPadDown.whenHeld(new RetractClimb(RobotContainer.climbSub));
+        DriverControl.DPadLeft.whenPressed(new ClimbIn(RobotContainer.climbSub));
+
 
         // Operator buttons.
         OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
@@ -37,6 +46,7 @@ public class OI {
         //OperatorControl.ButtonX.whenHeld(new IndexReverse(RobotContainer.indexSub));
 
         OperatorControl.ButtonB.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
+        OperatorControl.ButtonX.whenHeld(new ShootCargoTwo(RobotContainer.indexSub, RobotContainer.shootSub));
 
         OperatorControl.ButtonR2.whenHeld(new IndexForward(RobotContainer.indexSub, OperatorControl::GetTrigger_Right));
         OperatorControl.ButtonL2.whenHeld(new IndexReverse(RobotContainer.indexSub));

@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSub;
 
-public class ShootCargo extends CommandBase {
+public class ShootCargoTwo extends CommandBase {
   /** Creates a new ShootCargo. */
   IndexSub indexSub;
   ShooterSub shooterSub;
   Date initime;
 
-  public ShootCargo(IndexSub index, ShooterSub shooter) {
+  public ShootCargoTwo(IndexSub index, ShooterSub shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
     indexSub = index;
     shooterSub = shooter;
@@ -37,19 +37,21 @@ public class ShootCargo extends CommandBase {
     shooterSub.RunShooter(0.50);
     // if time is run than 2 seconds to turn on the index
     long timePassedMil = (new Date()).getTime() - initime.getTime();
-    if (timePassedMil >500) {
-      indexSub.BackIndexForward();
-      indexSub.FrontIndexForward();
+    if (timePassedMil > 500) {
+      if (indexSub.CargoIndexed() &&
+          timePassedMil < 1000) {
+        indexSub.StopIndex();
+      } else {
+        indexSub.RunIndex(0.8);
+      }
     }
   }
-  
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     shooterSub.StopShooter();
-    indexSub.StopFrontIndex();
-    indexSub.StopBackIndex();
+    indexSub.StopIndex();
   }
 
   // Returns true when the command should end.

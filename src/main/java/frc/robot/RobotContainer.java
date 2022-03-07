@@ -11,11 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.Auton.TwoBallCargoScore;
 import frc.robot.commands.DriveSub.DriveWithController;
 import frc.robot.commands.IndexSub.IndexAutomatic;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IndexSub;
-import frc.robot.subsystems.IntakeSub;
-import frc.robot.subsystems.ShooterSub;
-
+import frc.robot.subsystems.*;
 public class RobotContainer {
 
   // Subsystems
@@ -23,6 +19,7 @@ public class RobotContainer {
   public static ShooterSub shootSub = new ShooterSub();
   public static IntakeSub intakeSub = new IntakeSub();
   public static IndexSub indexSub = new IndexSub();
+  public static ClimbSub climbSub = new ClimbSub();
   // Operator Interface
   private static OI oi = new OI();
 

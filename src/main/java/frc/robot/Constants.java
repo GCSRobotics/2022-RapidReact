@@ -43,4 +43,9 @@ public final class Constants {
     public final static int FrontIndexMotor = 40;
     public final static int BackIndexMotor = 41;
 
+    //Climb
+    public final static int ClimbMotor = 51;
+    public final static int ClimbInChannel = 2;
+    public final static int ClimbOutChannel = 3;
+
 }

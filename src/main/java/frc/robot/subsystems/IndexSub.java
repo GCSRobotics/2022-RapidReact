@@ -38,6 +38,7 @@ public class IndexSub extends SubsystemBase {
     SmartDashboard.putNumber("Top Range Inches", TopDistSensor.getRange());
     SmartDashboard.putBoolean("Bottom Range Valid", BottomDistSensor.isRangeValid());
     SmartDashboard.putNumber("Bottom Range Inches", BottomDistSensor.getRange());
+    SmartDashboard.putBoolean("Cargo Indexed", this.CargoIndexed());
 
   }
   public void RunIndex(){
@@ -97,7 +98,7 @@ public class IndexSub extends SubsystemBase {
   
   public boolean CargoIndexed(){
     // Range is setup for inches
-    return TopDistSensor.isRangeValid() && TopDistSensor.GetRange() <= 5.0;
+    return TopDistSensor.isRangeValid() && TopDistSensor.GetRange() <= 2.5;
   }
 
   public boolean CargoIncoming(){

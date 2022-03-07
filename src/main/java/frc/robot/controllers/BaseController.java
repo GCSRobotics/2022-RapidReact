@@ -27,6 +27,12 @@ public abstract class BaseController extends Joystick {
     public Button ButtonOptionL;
     public Button ButtonOptionR;
 
+    public Button DPadUp;
+    public Button DPadRight;
+    public Button DPadDown;
+    public Button DPadLeft;
+
+
     protected BaseController(final int port) {
         super(port);
     }

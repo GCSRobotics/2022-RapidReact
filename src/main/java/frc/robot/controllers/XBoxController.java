@@ -48,6 +48,11 @@ public class XBoxController extends BaseController {
 
         ButtonL2 = new Button(() -> this.getRawAxis(2) >= 0.2);
         ButtonR2 = new Button(() -> this.getRawAxis(3) >= 0.2);
+
+        DPadRight = new Button(() -> (this.getPOV() > 45 && this.getPOV() < 135));
+        DPadDown = new Button(() -> (this.getPOV() > 135 && this.getPOV() < 225));
+        DPadLeft = new Button(() -> (this.getPOV() > 225 && this.getPOV() < 315));
+        DPadUp = new Button(() -> (this.getPOV() > 315 || (this.getPOV() >= 0 && this.getPOV() < 45)));
     }
 
     public double GetAxis_LeftX() {
