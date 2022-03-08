@@ -56,6 +56,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    robotContainer.AutonomousInit();
+    
      m_autonomousCommand = robotContainer.GetAutonomousCommand();
 
     // // schedule the autonomous command (example)
@@ -78,8 +80,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    robotContainer.setTeleopDefaultCommands();
-
+    robotContainer.TeleOpInit();
   }
 
   /** This function is called periodically during operator control. */

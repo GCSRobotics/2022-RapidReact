@@ -5,8 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.Auton.TwoBallCargoScore;
 import frc.robot.commands.DriveSub.DriveWithController;
@@ -27,29 +26,13 @@ public class RobotContainer {
   public RobotContainer() {
     //Bring up the default camera server for the RIO camera
     CameraServer.startAutomaticCapture();
-    
-    // Configure the button bindings
-    configureButtonBindings();
+    SmartDashboard.putNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
   }
 
-  public void setTeleopDefaultCommands() {
-    driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
-    
-    //Use a default command to allow the sensors to turn on/off the index motors.
-    indexSub.setDefaultCommand(new IndexAutomatic(indexSub));
-  }
-
-  //
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
-   * it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-
+  //  
+  public void AutonomousInit(){
+    double turretPos =  SmartDashboard.getNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
+    shootSub.setShooterPosition(turretPos);   
   }
 
   /**
@@ -57,13 +40,11 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand() {
-  // // An ExampleCommand will run in autonomous
-  // return m_autoCommand;
-  // }
-
   // Autonomous Commands
   public CommandBase GetAutonomousCommand() {
+
+    return new TwoBallCargoScore(driveSub, shootSub, indexSub, intakeSub);
+
     // double WaitTime = 0.1;
     // double StraightSpeed = 0.40;
     // double TurnSpeed = 0.4;
@@ -88,7 +69,23 @@ public class RobotContainer {
 
     // return new SlalomPath(drive);
 
-    return new TwoBallCargoScore(driveSub, shootSub, indexSub, intakeSub);
-
   }
+
+  //Teleop Iinitialization methods
+  public void TeleOpInit(){
+    // double turretPos =  SmartDashboard.getNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
+    // shootSub.setShooterPosition(turretPos);
+
+    this.setTeleopDefaultCommands();
+  }
+
+  private void setTeleopDefaultCommands() {
+    //Drive with controllers is always the drive sub default.
+    driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
+    
+    //Use a IndexSub default command to allow the sensors to turn on/off the index motors.
+    indexSub.setDefaultCommand(new IndexAutomatic(indexSub));
+  }
+
+
 }

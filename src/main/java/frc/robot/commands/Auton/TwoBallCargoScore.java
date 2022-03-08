@@ -30,12 +30,11 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
    */
   public TwoBallCargoScore(DriveSubsystem drivetrain, ShooterSub shooter, IndexSub index, IntakeSub intake) {
     m_drive = drivetrain;
-
     double driveSpeed = 0.40;
-
     double waitTime = 0.2;
     addCommands(
      new ShootCargo(index, shooter).withTimeout(1.5),
+     new TurnDegreesGyro(0.5, 180, drivetrain),
      new ExtendIntake(intake).withTimeout(0.2),
      new ParallelCommandGroup(
             new IntakeForward(intake),
@@ -45,15 +44,14 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
      new ShootCargo(index, shooter).withTimeout(1.5),
      new DriveDistance(driveSpeed, 12, drivetrain).withTimeout(1.5),
      new StopAll(shooter, index, intake)
-    // new TurnDegreesGyro(turnSpeed, 90, drivetrain).andThen(new WaitCommand(waitTime))
+
+     // new TurnDegreesGyro(turnSpeed, 90, drivetrain).andThen(new WaitCommand(waitTime))
     //new DriveDistance(driveSpeed, 40, drivetrain).andThen(new WaitCommand(waitTime)),
     //new TurnDegreesGyro(turnSpeed, -180, drivetrain).andThen(new WaitCommand(waitTime)),
     //new DriveDistance(driveSpeed, 48, drivetrain).andThen(new WaitCommand(waitTime)),
     //new TurnDegreesGyro(turnSpeed, -270, drivetrain).andThen(new WaitCommand(waitTime)),
     // new DriveDistance(driveSpeed, 40, drivetrain).andThen(new WaitCommand(waitTime)),
     //new TurnDegreesGyro(turnSpeed, -360, drivetrain)
-     
-
     );
   }
 }

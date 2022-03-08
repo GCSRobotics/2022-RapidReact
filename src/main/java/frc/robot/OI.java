@@ -12,7 +12,6 @@ import frc.robot.commands.IntakeSub.IntakeForward;
 import frc.robot.commands.IntakeSub.IntakeReverse;
 import frc.robot.commands.IntakeSub.RetractIntake;
 import frc.robot.commands.ShooterSub.TurnShooterDegrees;
-import frc.robot.commands.Auton.TurnDegreesGyro;
 import frc.robot.commands.ClimbSub.*;
 import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.GroupCommands.ShootCargoTwo;

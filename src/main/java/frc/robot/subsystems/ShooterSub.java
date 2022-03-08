@@ -11,7 +11,6 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -36,16 +35,19 @@ public class ShooterSub extends SubsystemBase {
     TurretMotor.setInverted(true);
     TurretEncoder = TurretMotor.getEncoder();
     TurretEncoder.setPositionConversionFactor(Constants.TurretRevolutionsPerDegree);
-    TurretEncoder.setPosition(90.0);
+    ResetTurretPosition(Constants.TurretStartPositionDefault);
 
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    table = NetworkTableInstance.getDefault().getTable("limelight");
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("TurretPosition", this.getTurretDegrees());
+  }
 
+  public void ResetTurretPosition(double degrees){
+    TurretEncoder.setPosition(degrees);
   }
 
   public void RunShooter(double speed) {
