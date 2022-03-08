@@ -11,6 +11,8 @@ import frc.robot.commands.IntakeSub.ExtendIntake;
 import frc.robot.commands.IntakeSub.IntakeForward;
 import frc.robot.commands.IntakeSub.IntakeReverse;
 import frc.robot.commands.IntakeSub.RetractIntake;
+import frc.robot.commands.ShooterSub.TurnShooterDegrees;
+import frc.robot.commands.Auton.TurnDegreesGyro;
 import frc.robot.commands.ClimbSub.*;
 import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.GroupCommands.ShootCargoTwo;
@@ -50,6 +52,11 @@ public class OI {
 
         OperatorControl.ButtonR2.whenHeld(new IndexForward(RobotContainer.indexSub, OperatorControl::GetTrigger_Right));
         OperatorControl.ButtonL2.whenHeld(new IndexReverse(RobotContainer.indexSub));
+
+        OperatorControl.DPadLeft.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 0));
+        OperatorControl.DPadUp.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 90));
+        OperatorControl.DPadRight.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 180));
+
 
     }
 

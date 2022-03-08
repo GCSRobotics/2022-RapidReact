@@ -24,6 +24,12 @@ public final class Constants {
     public final static double NeoEncoderCountsPerRev = 42;
     public final static double InchesPerMotorRotation = Math.PI * WheelDiameter / DriveGearRatio; // NeoEncoderCountsPerRev    
 
+    // Shooter Distance Calculations
+    public final static double TurretDiameter = 13.5;
+    public final static double TurretMotorDiameter = 1.432;
+    public final static double TurretGearRatio = 25;
+    public final static double TurretRevolutionsPerDegree = 1.85;//(((TurretDiameter/TurretMotorDiameter)*TurretGearRatio)/360);
+
 
     // Shooter Constants
     public final static int ShootingMotor = 21;
