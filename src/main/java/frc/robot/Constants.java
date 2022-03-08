@@ -28,8 +28,6 @@ public final class Constants {
     public final static double TurretDiameter = 13.5;
     public final static double TurretSprocketDiameter = 1.751;
     public final static double TurretGearRatio = 25;
-
-
     public final static double TurretRevolutionsPerDegree = 360 / (TurretDiameter/TurretSprocketDiameter*TurretGearRatio); // ~1.868;
 
     // Shooter Constants
