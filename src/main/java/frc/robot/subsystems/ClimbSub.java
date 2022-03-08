@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -21,6 +22,7 @@ public class ClimbSub extends SubsystemBase {
 
   /** Creates a new ClimbSub. */
   public ClimbSub() {
+    ClimbMotor.setNeutralMode(NeutralMode.Brake);
     // Use addRequirements() here to declare subsystem dependencies.
   }
   @Override
@@ -30,11 +32,11 @@ public class ClimbSub extends SubsystemBase {
   }
 
   public void ExtendClimb() {
-    ClimbMotor.set(VictorSPXControlMode.PercentOutput, 0.6);
+    ClimbMotor.set(VictorSPXControlMode.PercentOutput, 0.8);
   }
 
   public void RetractClimb() {
-    ClimbMotor.set(VictorSPXControlMode.PercentOutput, -0.6);
+    ClimbMotor.set(VictorSPXControlMode.PercentOutput, -0.8);
   }
 
   public void ClimbTiltOut() {
