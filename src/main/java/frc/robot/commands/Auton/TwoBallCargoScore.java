@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Auton;
 
+import javax.naming.PartialResultException;
+
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -40,9 +42,11 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
             new IntakeForward(intake),
             new IndexForward(index),
             new DriveDistance(driveSpeed, 30, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
-     new IndexReverse(index).withTimeout(0.2),
-     new ShootCargo(index, shooter).withTimeout(1.5),
+     new ParallelCommandGroup(
+            new IndexReverse(index).withTimeout(0.2),
+            new TurnDegreesGyro(0.5, 180, drivetrain)),
      new DriveDistance(driveSpeed, 12, drivetrain).withTimeout(1.5),
+     new ShootCargo(index, shooter).withTimeout(1.5),
      new StopAll(shooter, index, intake)
 
      // new TurnDegreesGyro(turnSpeed, 90, drivetrain).andThen(new WaitCommand(waitTime))
