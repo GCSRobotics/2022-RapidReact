@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.commands.Auton.SimpleAuton;
 import frc.robot.commands.Auton.TwoBallCargoScore;
 import frc.robot.commands.DriveSub.DriveWithController;
 import frc.robot.commands.IndexSub.IndexAutomatic;
@@ -42,33 +43,7 @@ public class RobotContainer {
    */
   // Autonomous Commands
   public CommandBase GetAutonomousCommand() {
-
-    return new TwoBallCargoScore(driveSub, shootSub, indexSub, intakeSub);
-
-    // double WaitTime = 0.1;
-    // double StraightSpeed = 0.40;
-    // double TurnSpeed = 0.4;
-
-    // return new AutonomousDistance(drive);
-
-    // return new SequentialCommandGroup(
-    // new DriveDistance(StraightSpeed, 150, drive),
-    // new WaitCommand(WaitTime),
-    // new FindPowerCellA(drive));
-
-    // return new SequentialCommandGroup(
-    // new DriveDistance(StraightSpeed, 162, drive),
-    // new WaitCommand(WaitTime),
-    // new TurnDegreesGyro(TurnSpeed, -90, drive),
-    // new WaitCommand(WaitTime),
-    // new FindPowerCellB(drive));
-
-    // return new BarrelRacing(drive);
-
-    // return new BouncePath(drive);
-
-    // return new SlalomPath(drive);
-
+    return new SimpleAuton(driveSub, shootSub, indexSub, intakeSub);
   }
 
   //Teleop Iinitialization methods
