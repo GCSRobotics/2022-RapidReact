@@ -38,12 +38,14 @@ public class ShooterSub extends SubsystemBase {
     ResetTurretPosition(Constants.TurretStartPositionDefault);
 
     table = NetworkTableInstance.getDefault().getTable("limelight");
+    SmartDashboard.putData("ShooterSub", this);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("TurretPosition", this.getTurretDegrees());
+    SmartDashboard.putNumber("EncoderConversionFactor", TurretEncoder.getPositionConversionFactor());
   }
 
   public void ResetTurretPosition(double degrees){
