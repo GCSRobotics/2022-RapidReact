@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -20,6 +21,7 @@ public class IntakeSub extends SubsystemBase {
       Constants.IntakeExtendChannel, Constants.IntakeRetractChannel);
 
   public IntakeSub() {
+    IntakeMotor.setIdleMode(IdleMode.kCoast);
     // addChild("IntakeMotor", IntakeMotor);
     // addChild("solenoid", solenoid);
     solenoid.set(DoubleSolenoid.Value.kReverse);

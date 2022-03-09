@@ -37,7 +37,7 @@ public class ShootCargo extends CommandBase {
     shooterSub.RunShooter(0.50);
     // if time is run than 2 seconds to turn on the index
     long timePassedMil = (new Date()).getTime() - initime.getTime();
-    if (timePassedMil >500) {
+    if (timePassedMil >800) {
       indexSub.BackIndexForward();
       indexSub.FrontIndexForward();
     }

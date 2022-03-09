@@ -8,6 +8,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -38,7 +39,11 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    // leftMotorGroup.setInverted(true);
+    leftFrontMotor.setIdleMode(IdleMode.kCoast);
+    leftRearMotor.setIdleMode(IdleMode.kCoast);
+    rightFrontMotor.setIdleMode(IdleMode.kCoast);
+    rightFrontMotor.setIdleMode(IdleMode.kCoast);
+
     leftFrontMotor.setInverted(true);
     leftRearMotor.setInverted(true);
 

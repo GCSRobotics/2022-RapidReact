@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.Rev2mDistanceSensor.Port;
@@ -29,6 +30,9 @@ public class IndexSub extends SubsystemBase {
     BottomDistSensor = new Rev2mDistanceSensor(Port.kOnboard, Unit.kInches, RangeProfile.kHighSpeed);
     TopDistSensor.setAutomaticMode(true);
     BottomDistSensor.setAutomaticMode(true);
+
+    FrontIndexMotor.setNeutralMode(NeutralMode.Coast);
+    BackIndexMotor.setNeutralMode(NeutralMode.Coast);
   }
 
   @Override

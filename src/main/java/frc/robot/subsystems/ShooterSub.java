@@ -5,9 +5,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -31,8 +33,10 @@ public class ShooterSub extends SubsystemBase {
     // ShootingEncoder = ShootingMotor.En();
     // ShootingEncoder.setPositionConversionFactor(Constants.TopShooterConversionFactor);
     ShootingMotor.setInverted(true);
+    ShootingMotor.setNeutralMode(NeutralMode.Brake);
 
     TurretMotor.setInverted(true);
+    TurretMotor.setIdleMode(IdleMode.kBrake);
     TurretEncoder = TurretMotor.getEncoder();
     TurretEncoder.setPositionConversionFactor(Constants.TurretRevolutionsPerDegree);
     ResetTurretPosition(Constants.TurretStartPositionDefault);
