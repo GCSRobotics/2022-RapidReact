@@ -20,7 +20,7 @@ public class SimpleAuton extends SequentialCommandGroup {
         double waitTime = 0.2;
         addCommands(
                 new ShootCargoAuton(index, shooter).withTimeout(1.5),
-                new DriveDistance(driveSpeed, 30, drivetrain).andThen(new WaitCommand(waitTime)),
+                new DriveDistance(driveSpeed, -30, drivetrain).andThen(new WaitCommand(waitTime)),
                 new ExtendIntake(intake).withTimeout(0.2),
                 new StopAll(shooter, index, intake));
     }
