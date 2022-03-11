@@ -28,12 +28,13 @@ public class RobotContainer {
     //Bring up the default camera server for the RIO camera
     CameraServer.startAutomaticCapture();
     SmartDashboard.putNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
+    SmartDashboard.putData("DriveSub", driveSub);
   }
 
   //  
   public void AutonomousInit(){
-    double turretPos =  SmartDashboard.getNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
-    shootSub.setShooterPosition(turretPos);   
+    // double turretPos =  SmartDashboard.getNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
+    // shootSub.setShooterPosition(turretPos);   
   }
 
   /**
