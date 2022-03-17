@@ -26,7 +26,8 @@ public class RobotContainer {
   // Robot Container Constructor
   public RobotContainer() {
     //Bring up the default camera server for the RIO camera
-    CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture(0);
+    CameraServer.startAutomaticCapture(1);
     SmartDashboard.putNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
     SmartDashboard.putData("DriveSub", driveSub);
   }
@@ -60,7 +61,7 @@ public class RobotContainer {
     driveSub.setDefaultCommand(new DriveWithController(driveSub, oi.GetDriverControl()));
     
     //Use a IndexSub default command to allow the sensors to turn on/off the index motors.
-    indexSub.setDefaultCommand(new IndexAutomatic(indexSub));
+    // indexSub.setDefaultCommand(new IndexAutomatic(indexSub));
   }
 
 
