@@ -37,9 +37,9 @@ public class ShootCargoAuton extends CommandBase {
     shooterSub.RunShooter(0.40);
     // if time is run than 2 seconds to turn on the index
     long timePassedMil = (new Date()).getTime() - initime.getTime();
-    if (timePassedMil > 500) {
+    if (timePassedMil > 700) {
       if (indexSub.CargoIndexed() &&
-          timePassedMil < 1000) {
+          timePassedMil < 1200) {
         indexSub.StopIndex();
       } else {
         indexSub.RunIndex(0.8);

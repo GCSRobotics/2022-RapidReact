@@ -102,7 +102,7 @@ public class IndexSub extends SubsystemBase {
   
   public boolean CargoIndexed(){
     // Range is setup for inches
-    return TopDistSensor.isRangeValid() && TopDistSensor.GetRange() <= 2.5;
+    return TopDistSensor.isRangeValid() && TopDistSensor.GetRange() <= 3.0;
   }
 
   public boolean CargoIncoming(){

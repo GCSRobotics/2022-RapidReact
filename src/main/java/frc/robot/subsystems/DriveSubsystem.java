@@ -19,130 +19,131 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
-  // Define Motors
-  private CANSparkMax leftFrontMotor = new CANSparkMax(Constants.LeftFrontDriveMotor, MotorType.kBrushless);
-  private CANSparkMax leftRearMotor = new CANSparkMax(Constants.LeftRearDriveMotor, MotorType.kBrushless);
-  private CANSparkMax rightFrontMotor = new CANSparkMax(Constants.RightFrontDriveMotor, MotorType.kBrushless);
-  private CANSparkMax rightRearMotor = new CANSparkMax(Constants.RightRearDriveMotor, MotorType.kBrushless);
+    // Define Motors
+    private CANSparkMax leftFrontMotor = new CANSparkMax(Constants.LeftFrontDriveMotor, MotorType.kBrushless);
+    private CANSparkMax leftRearMotor = new CANSparkMax(Constants.LeftRearDriveMotor, MotorType.kBrushless);
+    private CANSparkMax rightFrontMotor = new CANSparkMax(Constants.RightFrontDriveMotor, MotorType.kBrushless);
+    private CANSparkMax rightRearMotor = new CANSparkMax(Constants.RightRearDriveMotor, MotorType.kBrushless);
 
-  MotorControllerGroup leftMotorGroup = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
-  MotorControllerGroup rightMotorGroup = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
+    MotorControllerGroup leftMotorGroup = new MotorControllerGroup(leftFrontMotor, leftRearMotor);
+    MotorControllerGroup rightMotorGroup = new MotorControllerGroup(rightFrontMotor, rightRearMotor);
 
-  private RelativeEncoder leftEncoder;
-  private RelativeEncoder rightEncoder;
+    private RelativeEncoder leftEncoder;
+    private RelativeEncoder rightEncoder;
 
-  private final DifferentialDrive robotDrive;
+    private final DifferentialDrive robotDrive;
 
- // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
-   // Gyro Definitions
-   AHRS ahrs;
+    // private final ADXRS450_Gyro gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS1);
+    // Gyro Definitions
+    AHRS ahrs;
 
-  /** Creates a new DriveSubsystem. */
-  public DriveSubsystem() {
-    leftFrontMotor.setIdleMode(IdleMode.kCoast);
-    leftRearMotor.setIdleMode(IdleMode.kCoast);
-    rightFrontMotor.setIdleMode(IdleMode.kCoast);
-    rightFrontMotor.setIdleMode(IdleMode.kCoast);
+    /** Creates a new DriveSubsystem. */
+    public DriveSubsystem() {
+        leftFrontMotor.setIdleMode(IdleMode.kCoast);
+        leftRearMotor.setIdleMode(IdleMode.kCoast);
+        rightFrontMotor.setIdleMode(IdleMode.kCoast);
+        rightFrontMotor.setIdleMode(IdleMode.kCoast);
 
-    leftFrontMotor.setInverted(true);
-    leftRearMotor.setInverted(true);
+        leftFrontMotor.setInverted(true);
+        leftRearMotor.setInverted(true);
 
-    leftEncoder = leftFrontMotor.getEncoder();
-    rightEncoder = rightFrontMotor.getEncoder();
-    leftEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
-    rightEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
+        leftEncoder = leftFrontMotor.getEncoder();
+        rightEncoder = rightFrontMotor.getEncoder();
+        leftEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
+        rightEncoder.setPositionConversionFactor(Constants.InchesPerMotorRotation);
 
+        // gyro.calibrate();
+        CreateNavXObject();
+        resetEncoders();
 
-    //gyro.calibrate();
-    CreateNavXObject();
-    resetEncoders();
+        SmartDashboard.putNumber("LeftEncoder", leftEncoder.getPosition());
+        SmartDashboard.putNumber("RightEncoder", rightEncoder.getPosition());
+        // SmartDashboard.putNumber("Gyro", gyro.getAngle());
+        SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
+        SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
 
-    SmartDashboard.putNumber("LeftEncoder",leftEncoder.getPosition());
-    SmartDashboard.putNumber("RightEncoder",rightEncoder.getPosition());
-    //SmartDashboard.putNumber("Gyro", gyro.getAngle());
-    SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
-    SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
+        robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 
-    robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
-
-  }
-  private void CreateNavXObject() {
-    try {
-      /* Communicate w/navX-MXP via the MXP SPI Bus. */
-      /* Alternatively: I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB */
-      /*
-       * See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for
-       * details.
-       */
-      ahrs = new AHRS(SerialPort.Port.kMXP);
-    } catch (RuntimeException ex) {
-      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
-  }
-  @Override
-  public void periodic() {
-    SmartDashboard.putNumber("LeftEncoder",leftEncoder.getPosition());
-    SmartDashboard.putNumber("RightEncoder",rightEncoder.getPosition());
-    // SmartDashboard.putNumber("Gyro", gyro.getAngle());
-    System.out.print(leftEncoder.getPosition());
-    SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
-    SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
 
+    private void CreateNavXObject() {
+        try {
+            /* Communicate w/navX-MXP via the MXP SPI Bus. */
+            /* Alternatively: I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB */
+            /*
+             * See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for
+             * details.
+             */
+            ahrs = new AHRS(SerialPort.Port.kMXP);
+        } catch (RuntimeException ex) {
+            DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+        }
+    }
 
-    // This method will be called once per scheduler run
-  }
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("LeftEncoder", leftEncoder.getPosition());
+        SmartDashboard.putNumber("RightEncoder", rightEncoder.getPosition());
+        // SmartDashboard.putNumber("Gyro", gyro.getAngle());
+        System.out.print(leftEncoder.getPosition());
+        SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
+        SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
 
-// ********************************************
-  // DRIVE - Methods to Drive robot
-  // ********************************************
-  public void arcadeDrive(double speedAxis, double rotationAxis) {
-    robotDrive.arcadeDrive(speedAxis, rotationAxis, true);
-  }
+        // This method will be called once per scheduler run
+    }
 
-  public void arcadeDrive(double speedAxis, double rotationAxis, boolean squared) {
-    robotDrive.arcadeDrive(speedAxis, rotationAxis, squared);
-  }
+    // ********************************************
+    // DRIVE - Methods to Drive robot
+    // ********************************************
+    public void arcadeDrive(double speedAxis, double rotationAxis) {
+        robotDrive.arcadeDrive(speedAxis, rotationAxis, true);
+    }
 
-  public void setMaxDriveSpeed(double maxSpeed){
-    robotDrive.setMaxOutput(maxSpeed);
-  }
+    public void arcadeDrive(double speedAxis, double rotationAxis, boolean squared) {
+        robotDrive.arcadeDrive(speedAxis, rotationAxis, squared);
+    }
 
-  public void stop() {
-    robotDrive.arcadeDrive(0, 0);
-  }
-  // ********************************************
-  // ENCODER - Methods to get Encoder Readings
-  // ********************************************
-  public void resetEncoders() {
-    leftEncoder.setPosition(0.0);
-    rightEncoder.setPosition(0.0);
-  }
+    public void setMaxDriveSpeed(double maxSpeed) {
+        robotDrive.setMaxOutput(maxSpeed);
+    }
 
-  public double getLeftDistanceInch() {
-    return leftEncoder.getPosition();
-  }
+    public void stop() {
+        robotDrive.arcadeDrive(0, 0);
+    }
 
-  public double getRightDistanceInch() {
-    return rightEncoder.getPosition();
-  }
+    // ********************************************
+    // ENCODER - Methods to get Encoder Readings
+    // ********************************************
+    public void resetEncoders() {
+        leftEncoder.setPosition(0.0);
+        rightEncoder.setPosition(0.0);
+    }
 
-  public double getAverageDistanceInch() {
-    return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
-  }
+    public double getLeftDistanceInch() {
+        return leftEncoder.getPosition();
+    }
 
-  // ********************************************
-  // Gyro - Methods to get Gyro Readings
-  // ********************************************
-  public double getGyroAngle() {
-    // return gyro.getAngle();
-    return ahrs.getAngle();
-  }
+    public double getRightDistanceInch() {
+        return rightEncoder.getPosition();
+    }
 
-  public double getGyroRate() {
-    // return gyro.getRate();
-    return ahrs.getRate();
-  }
+    public double getAverageDistanceInch() {
+        return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
+    }
 
-  public void reset() {
-  }
+    // ********************************************
+    // Gyro - Methods to get Gyro Readings
+    // ********************************************
+    public double getGyroAngle() {
+        // return gyro.getAngle();
+        return ahrs.getAngle();
+    }
+
+    public double getGyroRate() {
+        // return gyro.getRate();
+        return ahrs.getRate();
+    }
+
+    public void reset() {
+    }
 }

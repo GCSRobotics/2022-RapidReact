@@ -11,52 +11,51 @@ import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSub;
 
 public class ShootCargoTwo extends CommandBase {
-  /** Creates a new ShootCargo. */
-  IndexSub indexSub;
-  ShooterSub shooterSub;
-  Date initime;
+    /** Creates a new ShootCargo. */
+    IndexSub indexSub;
+    ShooterSub shooterSub;
+    Date initime;
 
-  public ShootCargoTwo(IndexSub index, ShooterSub shooter) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    indexSub = index;
-    shooterSub = shooter;
-    addRequirements(indexSub);
-    addRequirements(shooterSub);
+    public ShootCargoTwo(IndexSub index, ShooterSub shooter) {
+        // Use addRequirements() here to declare subsystem dependencies.
+        indexSub = index;
+        shooterSub = shooter;
+        addRequirements(indexSub);
+        addRequirements(shooterSub);
 
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    initime = new Date();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    shooterSub.RunShooter(0.50);
-    // if time is run than 2 seconds to turn on the index
-    long timePassedMil = (new Date()).getTime() - initime.getTime();
-    if (timePassedMil > 500) {
-      if (indexSub.CargoIndexed() &&
-          timePassedMil < 1000) {
-        indexSub.StopIndex();
-      } else {
-        indexSub.RunIndex(0.8);
-      }
     }
-  }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    shooterSub.StopShooter();
-    indexSub.StopIndex();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        initime = new Date();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        shooterSub.RunShooterRPM(8300);
+        long timePassedMil = (new Date()).getTime() - initime.getTime();
+        // Don't run the index until the shooter is up to speed
+        if (timePassedMil > 500) {
+            if (indexSub.CargoIndexed() && timePassedMil < 1000) {
+                indexSub.StopIndex();
+            } else {
+                indexSub.RunIndex(0.3);
+            }
+        }
+    }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        shooterSub.StopShooter();
+        indexSub.StopIndex();
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
