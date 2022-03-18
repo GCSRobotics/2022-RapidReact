@@ -46,8 +46,8 @@ public class OI {
         //OperatorControl.ButtonA.whenHeld(new IndexForward(RobotContainer.indexSub));
         //OperatorControl.ButtonX.whenHeld(new IndexReverse(RobotContainer.indexSub));
 
-        OperatorControl.ButtonB.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
-        OperatorControl.ButtonX.whenHeld(new ShootCargoTwo(RobotContainer.indexSub, RobotContainer.shootSub));
+        // OperatorControl.ButtonX.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
+        OperatorControl.ButtonB.whenHeld(new ShootCargoTwo(RobotContainer.indexSub, RobotContainer.shootSub));
 
         OperatorControl.ButtonR2.whenHeld(new IndexForward(RobotContainer.indexSub, OperatorControl::GetTrigger_Right));
         OperatorControl.ButtonL2.whenHeld(new IndexReverse(RobotContainer.indexSub));
