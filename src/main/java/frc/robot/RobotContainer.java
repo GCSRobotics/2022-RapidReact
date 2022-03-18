@@ -25,7 +25,7 @@ public class RobotContainer {
   public RobotContainer() {
     //Bring up the default camera server for the RIO camera
     CameraServer.startAutomaticCapture(0);
-    CameraServer.startAutomaticCapture(1);
+    // CameraServer.startAutomaticCapture(1);
     SmartDashboard.putNumber(Constants.TurretStartPositionPrompt, Constants.TurretStartPositionDefault);
     SmartDashboard.putData("DriveSub", driveSub);
   }
