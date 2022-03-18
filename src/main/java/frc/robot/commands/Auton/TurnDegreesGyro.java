@@ -46,7 +46,7 @@ public class TurnDegreesGyro extends CommandBase {
     @Override
     public void execute() {
 
-        double output = m_pidController.calculate(m_drive.getGyroAngle());
+        double output = m_pidController.calculate(m_drive.getGyroYaw());
         double outputC = MathUtil.clamp(output, -m_speed, m_speed);
 
         // if(outputC < 0.1)

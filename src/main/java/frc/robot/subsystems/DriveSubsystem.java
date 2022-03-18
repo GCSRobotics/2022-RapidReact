@@ -61,8 +61,10 @@ public class DriveSubsystem extends SubsystemBase {
         // SmartDashboard.putNumber("Gyro", gyro.getAngle());
         SmartDashboard.putNumber("IMU_Yaw", ahrs.getYaw());
         SmartDashboard.putNumber("IMU_CompassHeading", ahrs.getCompassHeading());
+        SmartDashboard.putNumber("IMU_Angle", ahrs.getAngle());
 
-        robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
+
+        robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);    
 
     }
 
@@ -137,6 +139,10 @@ public class DriveSubsystem extends SubsystemBase {
     public double getGyroAngle() {
         // return gyro.getAngle();
         return ahrs.getAngle();
+    }
+    public double getGyroYaw() {
+        // return gyro.getAngle();
+        return ahrs.getYaw();
     }
 
     public double getGyroRate() {

@@ -52,9 +52,9 @@ public class OI {
         OperatorControl.ButtonR2.whenHeld(new IndexForward(RobotContainer.indexSub, OperatorControl::GetTrigger_Right));
         OperatorControl.ButtonL2.whenHeld(new IndexReverse(RobotContainer.indexSub));
 
-        // OperatorControl.DPadLeft.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 0));
-        // OperatorControl.DPadUp.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 90));
-        // OperatorControl.DPadRight.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 180));
+        OperatorControl.DPadLeft.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 0));
+        OperatorControl.DPadUp.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 90));
+        OperatorControl.DPadRight.whenPressed(new TurnShooterDegrees(RobotContainer.shootSub, 180));
 
 
     }
