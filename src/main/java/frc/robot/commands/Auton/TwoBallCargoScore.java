@@ -45,7 +45,7 @@ public class TwoBallCargoScore extends SequentialCommandGroup {
             new TurnDegreesGyro(0.5, 180, drivetrain)),
      new DriveDistance(driveSpeed, 12, drivetrain).withTimeout(1.5),
      new ShootCargo(index, shooter).withTimeout(1.5),
-     new StopAll(shooter, index, intake)
+     new StopAll(shooter, index, intake, m_drive)
 
      // new TurnDegreesGyro(turnSpeed, 90, drivetrain).andThen(new WaitCommand(waitTime))
     //new DriveDistance(driveSpeed, 40, drivetrain).andThen(new WaitCommand(waitTime)),

@@ -14,6 +14,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -37,15 +38,21 @@ public class ShooterSub extends SubsystemBase {
     private CANSparkMax TurretMotor = new CANSparkMax(Constants.TurretMotor, MotorType.kBrushless);
     private RelativeEncoder TurretEncoder;
 
-    private NetworkTable table;
+    private NetworkTable limelight;
+    private NetworkTableEntry limelightTX;
+    private NetworkTableEntry limelightTV;
 
     /** Creates a new ShooterSub. */
     public ShooterSub() {
         initShooterMotor();
         initTurretMotor();
 
-        table = NetworkTableInstance.getDefault().getTable("limelight");
+        limelight = NetworkTableInstance.getDefault().getTable("limelight");
+        limelightTX = limelight.getEntry("tx");
+        limelightTV = limelight.getEntry("tv");
+    
         SmartDashboard.putData("ShooterSub", this);
+
     }
 
     private void initShooterMotor() {
@@ -157,5 +164,13 @@ public class ShooterSub extends SubsystemBase {
 
     public double getTurretDegrees() {
         return TurretEncoder.getPosition();
+    }
+
+    public double getLimelightXPos() {
+        return limelightTX.getDouble(0);
+    }
+
+    public boolean LimelightTargetFound() {
+        return (limelightTV.getDouble(0) == 1.0);
     }
 }

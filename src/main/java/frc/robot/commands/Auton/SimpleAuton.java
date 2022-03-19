@@ -19,10 +19,12 @@ public class SimpleAuton extends SequentialCommandGroup {
         double driveSpeed = 0.40;
         double waitTime = 0.2;
         addCommands(
-                new DriveDistance(driveSpeed, 37, drivetrain).andThen(new WaitCommand(waitTime)).withTimeout(1),
-                new ShootCargo(index, shooter).withTimeout(1.5),
-                new DriveDistance(driveSpeed, 10, drivetrain).andThen(new WaitCommand(waitTime)).withTimeout(1),
-                new ExtendIntake(intake).withTimeout(0.2),
-                new StopAll(shooter, index, intake));
+                // new DriveDistance(driveSpeed, 46, drivetrain).andThen(new WaitCommand(waitTime)).withTimeout(1),
+                // new ShootCargo(index, shooter).withTimeout(1.5),
+                // new TwoBallCargoScore(drivetrain, shooter, index, intake),
+                // new DriveDistance(driveSpeed, 10, drivetrain).andThen(new WaitCommand(waitTime)).withTimeout(1),
+                new TurnDegreesGyro(0.5, -90, drivetrain),
+                // new ExtendIntake(intake).withTimeout(0.2),
+                new StopAll(shooter, index, intake, drivetrain));
     }
 }

@@ -13,7 +13,7 @@ public class TurnDegreesGyro extends CommandBase {
     private final DriveSubsystem m_drive;
     private final double m_degrees;
     private final double m_speed;
-    private final PIDController m_pidController = new PIDController(0.4, 0, 0.053);
+    private final PIDController m_pidController = new PIDController(0.2, 0.02, 0.0);
 
     /**
      * Creates a new TurnDegrees. This command will turn your robot for a desired
@@ -38,7 +38,7 @@ public class TurnDegreesGyro extends CommandBase {
         // m_Drive.arcadeDrive(0, 0);
         m_pidController.setSetpoint(m_degrees);
         m_drive.reset();
-        m_pidController.setTolerance(0.25);
+        m_pidController.setTolerance(0.05);
 
     }
 
@@ -46,14 +46,14 @@ public class TurnDegreesGyro extends CommandBase {
     @Override
     public void execute() {
 
-        double output = m_pidController.calculate(m_drive.getGyroYaw());
+        double output = m_pidController.calculate(m_drive.getGyroAngle());
         double outputC = MathUtil.clamp(output, -m_speed, m_speed);
 
         // if(outputC < 0.1)
         // {
         // outputC = 0.1;
         // }
-        m_drive.arcadeDrive(0, outputC);
+        m_drive.arcadeDrive(0, -outputC);
 
     }
 
