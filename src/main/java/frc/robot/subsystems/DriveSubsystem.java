@@ -77,7 +77,7 @@ public class DriveSubsystem extends SubsystemBase {
              * details.
              */
             ahrs = new AHRS(SerialPort.Port.kMXP);
-            ahrs.reset();
+            // ahrs.reset();
         } catch (RuntimeException ex) {
             DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
         }
@@ -155,7 +155,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void reset() {
-        
+        ahrs.reset();
         
     }
 

@@ -13,6 +13,8 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -94,6 +96,8 @@ public class ShooterSub extends SubsystemBase {
         SmartDashboard.putNumber("EncoderConversionFactor", TurretEncoder.getPositionConversionFactor());
         SmartDashboard.putNumber("ShooterOutputPct", ShootingMotor.getMotorOutputPercent());
         SmartDashboard.putNumber("ShooterVelocityNative", ShootingMotor.getSelectedSensorVelocity(PidLoopIdx));
+
+        SmartDashboard.putNumber("LimelightTx", getLimelightXPos());
     }
 
     public void ResetTurretPosition(double degrees) {
@@ -172,5 +176,36 @@ public class ShooterSub extends SubsystemBase {
 
     public boolean LimelightTargetFound() {
         return (limelightTV.getDouble(0) == 1.0);
+    }
+
+    public void alignTurret(PIDController pidController, double speed) {
+        if (LimelightTargetFound()) {
+            double setpoint = getLimelightSetpoint();
+            
+            pidController.setSetpoint(setpoint);
+            
+            double output = pidController.calculate(getTurretDegrees());
+            double outputC = MathUtil.clamp(output, -speed, speed);
+        
+            SmartDashboard.putNumber("LimelightSetpoint", setpoint);
+            SmartDashboard.putNumber("PID output", output);
+            SmartDashboard.putNumber("PID outputC", outputC);
+        
+            RunTurret(outputC);
+        }
+    }
+
+    public double getLimelightSetpoint() {
+        double setpoint = getLimelightXPos() + getTurretDegrees();
+            
+        if (setpoint > 180) {
+            setpoint = 180;  
+        }
+            
+        if (setpoint < 0) {
+            setpoint = 0;
+        }
+
+        return setpoint;
     }
 }

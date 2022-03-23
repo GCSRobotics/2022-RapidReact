@@ -6,6 +6,7 @@ package frc.robot.commands.GroupCommands;
 
 import java.util.Date;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSub;
@@ -15,6 +16,8 @@ public class ShootCargoAuton extends CommandBase {
   IndexSub indexSub;
   ShooterSub shooterSub;
   Date initime;
+  private PIDController pidController = new PIDController(0.045, 0, 0.0025);
+  private double speed = 0.1;
 
   public ShootCargoAuton(IndexSub index, ShooterSub shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
