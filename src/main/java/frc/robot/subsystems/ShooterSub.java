@@ -52,7 +52,7 @@ public class ShooterSub extends SubsystemBase {
         limelight = NetworkTableInstance.getDefault().getTable("limelight");
         limelightTX = limelight.getEntry("tx");
         limelightTV = limelight.getEntry("tv");
-    
+
         SmartDashboard.putData("ShooterSub", this);
 
     }
@@ -92,11 +92,11 @@ public class ShooterSub extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        SmartDashboard.putNumber("TurretPosition", this.getTurretDegrees());
-        SmartDashboard.putNumber("EncoderConversionFactor", TurretEncoder.getPositionConversionFactor());
         SmartDashboard.putNumber("ShooterOutputPct", ShootingMotor.getMotorOutputPercent());
         SmartDashboard.putNumber("ShooterVelocityNative", ShootingMotor.getSelectedSensorVelocity(PidLoopIdx));
 
+        SmartDashboard.putNumber("TurretEncoderConversionFactor", TurretEncoder.getPositionConversionFactor());
+        SmartDashboard.putNumber("TurretDegrees", this.getTurretDegrees());
         SmartDashboard.putNumber("LimelightTx", getLimelightXPos());
     }
 
@@ -112,7 +112,7 @@ public class ShooterSub extends SubsystemBase {
         SmartDashboard.putNumber("ShooterTargetRPM", targetRPM);
 
         // Determine the target velocity in TalonFX units using 2:1 gear ratio
-        double targetVelocity_FalconUnits = RPM2Falcon(targetRPM, 2.0);
+        // double targetVelocity_FalconUnits = RPM2Falcon(targetRPM, 2.0);
 
         ShootingMotor.set(TalonFXControlMode.Velocity, targetRPM);
     }
@@ -138,32 +138,12 @@ public class ShooterSub extends SubsystemBase {
         ShootingMotor.set(ControlMode.PercentOutput, 0.0);
     }
 
-    public void setShooterPosition(double degrees) {
+    public void RunTurret(double speed) {
+        TurretMotor.set(speed);
     }
-
-    // public void TurnTurret(double speed) {
-    // float Kp = -0.1f;
-    // float min_command = 0.05f;
-
-    // NetworkTableEntry tx = table.getEntry("tx");
-    // double targetOffsetAngle_Vertical = tx.getDouble(0.0);
-
-    // double heading_error = -targetOffsetAngle_Vertical;
-    // double steering_adjust = 0.0f;
-    // if (targetOffsetAngle_Vertical > 1.0) {
-    // steering_adjust = Kp * heading_error - min_command;
-    // } else if (targetOffsetAngle_Vertical < 1.0) {
-    // steering_adjust = Kp * heading_error + min_command;
-    // }
-    // // TurretMotor.set(steering_adjust);
-    // }
 
     public void StopTurret() {
         TurretMotor.set(0.0);
-    }
-
-    public void RunTurret(double speed) {
-        TurretMotor.set(speed);
     }
 
     public double getTurretDegrees() {
@@ -180,28 +160,34 @@ public class ShooterSub extends SubsystemBase {
 
     public void alignTurret(PIDController pidController, double speed) {
         if (LimelightTargetFound()) {
-            double setpoint = getLimelightSetpoint();
-            
-            pidController.setSetpoint(setpoint);
-            
-            double output = pidController.calculate(getTurretDegrees());
+            // double setpoint = getLimelightSetpoint();
+            double limelightX = getLimelightXPos();
+
+            double output = pidController.calculate(limelightX);
             double outputC = MathUtil.clamp(output, -speed, speed);
-        
-            SmartDashboard.putNumber("LimelightSetpoint", setpoint);
             SmartDashboard.putNumber("PID output", output);
             SmartDashboard.putNumber("PID outputC", outputC);
-        
-            RunTurret(outputC);
+
+            // Make sure Turret doesn't go past the setpoints
+            // Only adjust the turret if it's Between 0 & 180 degrees
+            double turretPosition = getTurretDegrees();
+            if (turretPosition >= 0 && turretPosition <= 180) {
+                RunTurret(outputC);
+            } else {
+                StopTurret();
+            }
+        }else {
+            StopTurret();
         }
     }
 
     public double getLimelightSetpoint() {
         double setpoint = getLimelightXPos() + getTurretDegrees();
-            
+
         if (setpoint > 180) {
-            setpoint = 180;  
+            setpoint = 180;
         }
-            
+
         if (setpoint < 0) {
             setpoint = 0;
         }

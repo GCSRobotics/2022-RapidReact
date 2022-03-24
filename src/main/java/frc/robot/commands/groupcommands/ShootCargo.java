@@ -12,54 +12,56 @@ import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.ShooterSub;
 
 public class ShootCargo extends CommandBase {
-  /** Creates a new ShootCargo. */
-  IndexSub indexSub;
-  ShooterSub shooterSub;
-  Date initime;
-  private PIDController pidController = new PIDController(0.045, 0, 0.0025);
-  private double speed = 0.1;
+    /** Creates a new ShootCargo. */
+    IndexSub indexSub;
+    ShooterSub shooterSub;
+    Date initime;
+    private PIDController pidController = new PIDController(0.045, 0, 0.0025);
+    private double speed = 0.1;
 
-  public ShootCargo(IndexSub index, ShooterSub shooter) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    indexSub = index;
-    shooterSub = shooter;
-    addRequirements(indexSub);
-    addRequirements(shooterSub);
+    public ShootCargo(IndexSub index, ShooterSub shooter) {
+        // Use addRequirements() here to declare subsystem dependencies.
+        indexSub = index;
+        shooterSub = shooter;
+        addRequirements(indexSub);
+        addRequirements(shooterSub);
 
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    initime = new Date();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    shooterSub.RunShooterRPM(8300);
-    // if time is run than 2 seconds to turn on the index
-    long timePassedMil = (new Date()).getTime() - initime.getTime();
-    if (timePassedMil >800) {
-      indexSub.BackIndexForward();
-      indexSub.FrontIndexForward();
     }
 
-    shooterSub.alignTurret(pidController, speed);
-  }
-  
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        initime = new Date();
+        // Always align the turret so that limelight x = 0.0
+        // or center of view
+        pidController.setSetpoint(0.0);
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    shooterSub.StopShooter();
-    indexSub.StopFrontIndex();
-    indexSub.StopBackIndex();
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        shooterSub.RunShooterRPM(8300);
+        // if time is run than 2 seconds to turn on the index
+        long timePassedMil = (new Date()).getTime() - initime.getTime();
+        if (timePassedMil > 800) {
+            indexSub.BackIndexForward();
+            indexSub.FrontIndexForward();
+        }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+        shooterSub.alignTurret(pidController, speed);
+    }
+
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+        shooterSub.StopShooter();
+        indexSub.StopFrontIndex();
+        indexSub.StopBackIndex();
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

@@ -55,6 +55,7 @@ public class ShootCargoAuton extends CommandBase {
   public void end(boolean interrupted) {
     shooterSub.StopShooter();
     indexSub.StopIndex();
+    shooterSub.StopTurret();
   }
 
   // Returns true when the command should end.
