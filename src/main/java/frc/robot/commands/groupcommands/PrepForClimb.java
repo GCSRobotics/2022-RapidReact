@@ -6,6 +6,7 @@ package frc.robot.commands.GroupCommands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.IntakeSub.RetractIntake;
+import frc.robot.commands.ShooterSub.TurnShooterDegrees;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
 import frc.robot.subsystems.ShooterSub;
@@ -17,8 +18,8 @@ public class PrepForClimb extends SequentialCommandGroup {
     // Use addRequirements() here to declare subsystem dependencies.
     addCommands(
       new ShootCargo(index, shooter),
-      new RetractIntake(intake)
-     // new TurnTurret(shooter)
+      new RetractIntake(intake),
+      new TurnShooterDegrees(shooter, 180)
     );  
   }
 }
