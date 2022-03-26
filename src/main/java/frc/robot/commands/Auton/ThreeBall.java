@@ -24,38 +24,34 @@ public class ThreeBall extends SequentialCommandGroup {
   public ThreeBall(DriveSubsystem drivetrain, IndexSub index, ShooterSub shooter, IntakeSub intake) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    double driveSpeed = 0.40;
+    double driveSpeed = 0.45;
+    double turnSpeed = 0.35;
     double waitTime = 0.2;
     addCommands(
-      // Backup
-        new DriveDistance(driveSpeed, 50, drivetrain).withTimeout(1.5),
-      // Shoot preloaded Ball
+        // Backup
+        new DriveDistance(driveSpeed, 52, drivetrain),
+        // Shoot preloaded Ball
         new ShootCargo(index, shooter).withTimeout(1.5),
-      // Turn and Get Ball 2
-        new ParallelCommandGroup(
-            new TurnDegreesGyro(0.5, 90, drivetrain),
-            new TurnShooterDegrees(shooter, 0)),
+        // Turn and Get Ball 2
+        new TurnDegreesGyro(turnSpeed, 90, drivetrain),
         new ExtendIntake(intake).withTimeout(0.2),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
             new DriveDistance(driveSpeed, -12, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
         new IndexReverse(index).withTimeout(0.2),
+        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
         new ShootCargo(index, shooter).withTimeout(1.5),
-      // Turn and Get Ball 3
-        new ParallelCommandGroup(
-            new RetractIntake(intake),
-            new TurnShooterDegrees(shooter, 0),
-            new TurnDegreesGyro(0.5, -90, drivetrain)),
-        new DriveDistance(driveSpeed, -40, drivetrain).withTimeout(1.5),
-        new ExtendIntake(intake).withTimeout(0.2),
+        // // Turn and Get Ball 3
+        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
+        new DriveDistance(driveSpeed, -60, drivetrain).withTimeout(1.5),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
-            new DriveDistance(driveSpeed, 20, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
-        new IndexReverse(index).withTimeout(0.2),
-        new ShootCargo(index, shooter).withTimeout(1.5),
-        new StopAll(shooter, index, intake, drivetrain)
+            new DriveDistance(driveSpeed, -20, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1)
+    // new IndexReverse(index).withTimeout(0.2),
+    // new ShootCargo(index, shooter).withTimeout(1.5),
+    // new StopAll(shooter, index, intake, drivetrain)
     );
   }
 }
