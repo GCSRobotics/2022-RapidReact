@@ -29,6 +29,7 @@ public class AlignTurretToTarget extends CommandBase {
         // Always align the turret so that limelight x = 0.0
         // or center of view
         pidController.setSetpoint(0.0);
+        pidController.setTolerance(2.0);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

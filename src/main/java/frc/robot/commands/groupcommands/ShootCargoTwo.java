@@ -42,7 +42,7 @@ public class ShootCargoTwo extends CommandBase {
         shooterSub.RunShooterRPM(8300);
         long timePassedMil = (new Date()).getTime() - initime.getTime();
         // Don't run the index until the shooter is up to speed
-        if (timePassedMil > 500) {
+        if (timePassedMil > 800) {
             if (indexSub.CargoIndexed() && timePassedMil < 1000) {
                 indexSub.StopIndex();
             } else {

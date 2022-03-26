@@ -164,20 +164,20 @@ public class ShooterSub extends SubsystemBase {
             double limelightX = getLimelightXPos();
 
             double output = pidController.calculate(limelightX);
-            double outputC = MathUtil.clamp(output, -speed, speed);
+            double outputC = -MathUtil.clamp(output, -speed, speed);
             SmartDashboard.putNumber("PID output", output);
             SmartDashboard.putNumber("PID outputC", outputC);
+            SmartDashboard.putBoolean("PID At Setpoint", pidController.atSetpoint());
 
             // Make sure Turret doesn't go past the setpoints
-            // Only adjust the turret if it's Between 0 & 180 degrees
             double turretPosition = getTurretDegrees();
-            if (turretPosition >= 0 && turretPosition <= 180) {
-                RunTurret(outputC);
-            } else {
+            if ((turretPosition >= 180 && limelightX > 0.0) ||
+                    (turretPosition <= 0 && limelightX < 0.0) ||
+                    pidController.atSetpoint()) {
                 StopTurret();
+            } else {
+                RunTurret(outputC);
             }
-        }else {
-            StopTurret();
         }
     }
 
