@@ -7,10 +7,11 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.Auton.SimpleAuton;
 import frc.robot.commands.Auton.ThreeBall;
+import frc.robot.commands.Auton.TwoBallCenter;
+import frc.robot.commands.Auton.TwoBallLeft;
 import frc.robot.commands.DriveSub.DriveWithController;
 import frc.robot.subsystems.*;
 
@@ -35,8 +36,10 @@ public class RobotContainer {
     SmartDashboard.putData("DriveSub", driveSub);
 
     // Add commands to the autonomous command chooser
-    auton_chooser.setDefaultOption("Three Ball Auto", new ThreeBall(driveSub, indexSub, shootSub, intakeSub));
-    auton_chooser.addOption("Simple Auto", new SimpleAuton(driveSub, shootSub, indexSub, intakeSub));
+    auton_chooser.setDefaultOption("Right - 3 Ball", new ThreeBall(driveSub, indexSub, shootSub, intakeSub));
+    auton_chooser.addOption("Center - 2 Ball", new TwoBallCenter(driveSub, indexSub, shootSub, intakeSub));
+    auton_chooser.addOption("Left - 2 Ball", new TwoBallLeft(driveSub, indexSub, shootSub, intakeSub));
+    auton_chooser.addOption("Any - 1 Ball", new SimpleAuton(driveSub, shootSub, indexSub, intakeSub));
 
     // Put the chooser on the dashboard
     SmartDashboard.putData(auton_chooser);

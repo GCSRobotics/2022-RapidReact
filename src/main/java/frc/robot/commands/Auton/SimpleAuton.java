@@ -5,10 +5,8 @@
 package frc.robot.commands.Auton;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.GroupCommands.StopAll;
-import frc.robot.commands.IntakeSub.ExtendIntake;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
@@ -17,14 +15,11 @@ import frc.robot.subsystems.ShooterSub;
 public class SimpleAuton extends SequentialCommandGroup {
     public SimpleAuton(DriveSubsystem drivetrain, ShooterSub shooter, IndexSub index, IntakeSub intake) {
         double driveSpeed = 0.40;
-        double waitTime = 0.2;
         addCommands(
-                // new DriveDistance(driveSpeed, 46, drivetrain).andThen(new WaitCommand(waitTime)).withTimeout(1),
-                // new ShootCargo(index, shooter).withTimeout(1.5),
-                // new TwoBallCargoScore(drivetrain, shooter, index, intake),
-                // new DriveDistance(driveSpeed, 10, drivetrain).andThen(new WaitCommand(waitTime)).withTimeout(1),
-                new TurnDegreesGyro(0.5, -90, drivetrain),
-                // new ExtendIntake(intake).withTimeout(0.2),
+                // Backup
+                new DriveDistance(driveSpeed, 52, drivetrain),
+                // Shoot preloaded Ball
+                new ShootCargo(index, shooter).withTimeout(1.5),
                 new StopAll(shooter, index, intake, drivetrain));
     }
 }
