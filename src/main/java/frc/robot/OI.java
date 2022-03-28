@@ -7,14 +7,10 @@ package frc.robot;
 import frc.robot.controllers.BaseController;
 import frc.robot.controllers.ControllerType;
 import frc.robot.commands.IndexSub.IndexReverse;
-import frc.robot.commands.IntakeSub.ExtendIntake;
-import frc.robot.commands.IntakeSub.IntakeForward;
-import frc.robot.commands.IntakeSub.IntakeReverse;
-import frc.robot.commands.IntakeSub.RetractIntake;
+import frc.robot.commands.IntakeSub.*;
 import frc.robot.commands.ShooterSub.AlignTurretToTarget;
 import frc.robot.commands.ShooterSub.TurnShooterDegrees;
 import frc.robot.commands.ClimbSub.*;
-import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.GroupCommands.ShootCargoTwo;
 import frc.robot.commands.IndexSub.IndexForward;
 
@@ -43,9 +39,6 @@ public class OI {
         // Operator buttons.
         OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
         OperatorControl.ButtonL1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
-
-        //OperatorControl.ButtonA.whenHeld(new IndexForward(RobotContainer.indexSub));
-        //OperatorControl.ButtonX.whenHeld(new IndexReverse(RobotContainer.indexSub));
 
         // OperatorControl.ButtonX.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
         OperatorControl.ButtonX.whenHeld(new AlignTurretToTarget(RobotContainer.shootSub));
