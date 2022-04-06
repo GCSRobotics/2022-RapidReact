@@ -44,7 +44,7 @@ public class ShootCargo extends CommandBase {
         // if time is run than 2 seconds to turn on the index
         long timePassedMil = (new Date()).getTime() - initime.getTime();
         if (timePassedMil > 800) {
-            indexSub.RunIndex(.3);;
+            indexSub.RunIndex(.7);;
         }
 
         shooterSub.alignTurret(pidController, speed);

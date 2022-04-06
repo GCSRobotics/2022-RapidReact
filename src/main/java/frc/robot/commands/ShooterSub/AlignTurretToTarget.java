@@ -12,8 +12,8 @@ import frc.robot.subsystems.ShooterSub;
 public class AlignTurretToTarget extends CommandBase {
     IndexSub indexSub;
     ShooterSub shooterSub;
-    private PIDController pidController = new PIDController(0.045, 0, 0.0025);
-    private double speed = 0.1;
+    private PIDController pidController = new PIDController(0.045, 0, 0.0035);
+    private double speed = 0.15;
 
     /** Creates a new AlignTurretToTarget. */
     public AlignTurretToTarget(ShooterSub shooter) {

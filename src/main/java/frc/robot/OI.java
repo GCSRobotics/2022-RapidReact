@@ -6,12 +6,15 @@ package frc.robot;
 
 import frc.robot.controllers.BaseController;
 import frc.robot.controllers.ControllerType;
+import frc.robot.subsystems.IndexSub;
 import frc.robot.commands.IndexSub.IndexReverse;
 import frc.robot.commands.IntakeSub.*;
 import frc.robot.commands.ShooterSub.AlignTurretToTarget;
 import frc.robot.commands.ShooterSub.TurnShooterDegrees;
 import frc.robot.commands.ClimbSub.*;
 import frc.robot.commands.GroupCommands.ShootCargoTwo;
+import frc.robot.commands.GroupCommands.PrepForClimb;
+import frc.robot.commands.GroupCommands.ShootCargo;
 import frc.robot.commands.IndexSub.IndexForward;
 
 /** Add your docs here. */
@@ -39,10 +42,14 @@ public class OI {
         // Operator buttons.
         OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
         OperatorControl.ButtonL1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
+        OperatorControl.ButtonA.whenPressed(new PrepForClimb(RobotContainer.indexSub, RobotContainer.intakeSub, RobotContainer.shootSub));
+
 
         // OperatorControl.ButtonX.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
         OperatorControl.ButtonX.whenHeld(new AlignTurretToTarget(RobotContainer.shootSub));
         OperatorControl.ButtonB.whenHeld(new ShootCargoTwo(RobotContainer.indexSub, RobotContainer.shootSub));
+        OperatorControl.ButtonY.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
+
 
         OperatorControl.ButtonR2.whenHeld(new IndexForward(RobotContainer.indexSub, OperatorControl::GetTrigger_Right));
         OperatorControl.ButtonL2.whenHeld(new IndexReverse(RobotContainer.indexSub));

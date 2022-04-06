@@ -28,7 +28,7 @@ public class TwoBallLeft extends SequentialCommandGroup {
     double waitTime = 0.2;
     addCommands(
         // Backup
-        new DriveDistance(driveSpeed, 52, drivetrain),
+        new DriveDistance(driveSpeed, 52, drivetrain).withTimeout(1.5),
         // Shoot preloaded Ball
         new ShootCargo(index, shooter).withTimeout(1.5),
         // Turn and Get Ball 2
@@ -37,7 +37,7 @@ public class TwoBallLeft extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
-            new DriveDistance(driveSpeed, -12, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
+            new DriveDistance(driveSpeed, -12, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1.5),
         new IndexReverse(index).withTimeout(0.2),
         new TurnDegreesGyro(turnSpeed, -90, drivetrain),
         new ShootCargo(index, shooter).withTimeout(1.5),

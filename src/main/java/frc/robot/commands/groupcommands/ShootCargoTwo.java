@@ -39,7 +39,9 @@ public class ShootCargoTwo extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooterSub.RunShooterRPM(8500);
+       // shooterSub.RunShooterRPM(8500);
+       shooterSub.RunShooterRPM(7600);
+
         long timePassedMil = (new Date()).getTime() - initime.getTime();
         // Don't run the index until the shooter is up to speed
         if (timePassedMil > 800) {

@@ -17,7 +17,7 @@ public class SimpleAuton extends SequentialCommandGroup {
         double driveSpeed = 0.40;
         addCommands(
                 // Backup
-                new DriveDistance(driveSpeed, 52, drivetrain),
+                new DriveDistance(driveSpeed, 52, drivetrain).withTimeout(1.5),
                 // Shoot preloaded Ball
                 new ShootCargo(index, shooter).withTimeout(1.5),
                 new StopAll(shooter, index, intake, drivetrain));

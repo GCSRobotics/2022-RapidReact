@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.GroupCommands.*;
 import frc.robot.commands.IndexSub.*;
 import frc.robot.commands.IntakeSub.*;
+import frc.robot.commands.ShooterSub.TurnShooterDegrees;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IndexSub;
 import frc.robot.subsystems.IntakeSub;
@@ -28,29 +29,30 @@ public class ThreeBall extends SequentialCommandGroup {
     double waitTime = 0.2;
     addCommands(
         // Backup
-        new DriveDistance(driveSpeed, 52, drivetrain),
+        new DriveDistance(driveSpeed, 52, drivetrain).withTimeout(1.5),
         // Shoot preloaded Ball
         new ShootCargo(index, shooter).withTimeout(1.5),
         // Turn and Get Ball 2
-        new TurnDegreesGyro(turnSpeed, 90, drivetrain),
+        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
         new ExtendIntake(intake).withTimeout(0.2),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
             new DriveDistance(driveSpeed, -12, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
         new IndexReverse(index).withTimeout(0.2),
-        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
+        new TurnDegreesGyro(turnSpeed, 90, drivetrain),
         new ShootCargo(index, shooter).withTimeout(1.5),
         // // Turn and Get Ball 3
-        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
+        new TurnDegreesGyro(turnSpeed, 75, drivetrain),
         new DriveDistance(driveSpeed, -60, drivetrain).withTimeout(1.5),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
             new DriveDistance(driveSpeed, -20, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
         new IndexReverse(index).withTimeout(0.2),
+        // new TurnDegreesGyro(turnSpeed, -75, drivetrain),
+        new TurnShooterDegrees(shooter, 0),
         new ShootCargo(index, shooter).withTimeout(1.5),
-        new TurnDegreesGyro(turnSpeed, 90, drivetrain),
         new StopAll(shooter, index, intake, drivetrain));
   }
 }
