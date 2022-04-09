@@ -29,28 +29,29 @@ public class ThreeBall extends SequentialCommandGroup {
     double waitTime = 0.2;
     addCommands(
         // Backup
-        new DriveDistance(driveSpeed, 52, drivetrain).withTimeout(1.5),
+        new DriveDistance(driveSpeed, 55, drivetrain).withTimeout(1.5),
+        new DriveDistance(driveSpeed, -1, drivetrain).withTimeout(0.5),
         // Shoot preloaded Ball
         new ShootCargo(index, shooter).withTimeout(1.5),
         // Turn and Get Ball 2
-        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
-        new ExtendIntake(intake).withTimeout(0.2),
+        new ParallelCommandGroup(
+            new TurnDegreesGyro(turnSpeed, -90, drivetrain),
+            new ExtendIntake(intake).withTimeout(0.2)),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
-            new DriveDistance(driveSpeed, -12, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
+            new DriveDistance(driveSpeed, -20, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1.2),
         new IndexReverse(index).withTimeout(0.2),
         new TurnDegreesGyro(turnSpeed, 90, drivetrain),
         new ShootCargo(index, shooter).withTimeout(1.5),
         // // Turn and Get Ball 3
-        new TurnDegreesGyro(turnSpeed, 75, drivetrain),
-        new DriveDistance(driveSpeed, -60, drivetrain).withTimeout(1.5),
+        new TurnDegreesGyro(turnSpeed, 80, drivetrain),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
-            new DriveDistance(driveSpeed, -20, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1),
+            new DriveDistance(driveSpeed, -95, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1.7),
         new IndexReverse(index).withTimeout(0.2),
-        // new TurnDegreesGyro(turnSpeed, -75, drivetrain),
+        new TurnDegreesGyro(turnSpeed, -30, drivetrain),
         new TurnShooterDegrees(shooter, 0),
         new ShootCargo(index, shooter).withTimeout(1.5),
         new StopAll(shooter, index, intake, drivetrain));

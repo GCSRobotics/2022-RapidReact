@@ -21,6 +21,7 @@ public class TurnShooterDegrees extends CommandBase {
     shooterSub = shooter;
     TargetDegrees = Degree;
     addRequirements(shooter);
+    m_pidController.setTolerance(0.5);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -39,6 +40,7 @@ public class TurnShooterDegrees extends CommandBase {
     SmartDashboard.putNumber("TargetDegrees", TargetDegrees);
     SmartDashboard.putNumber("PID output", output);
     SmartDashboard.putNumber("PID outputC", outputC);
+    SmartDashboard.putBoolean("Turret AtSetpoint", m_pidController.atSetpoint());
 
     shooterSub.RunTurret(outputC);
   }

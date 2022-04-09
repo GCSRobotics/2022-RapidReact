@@ -11,6 +11,7 @@ import frc.robot.commands.IndexSub.IndexReverse;
 import frc.robot.commands.IntakeSub.*;
 import frc.robot.commands.ShooterSub.AlignTurretToTarget;
 import frc.robot.commands.ShooterSub.TurnShooterDegrees;
+import frc.robot.commands.Auton.TurnDegreesGyro;
 import frc.robot.commands.ClimbSub.*;
 import frc.robot.commands.GroupCommands.ShootCargoTwo;
 import frc.robot.commands.GroupCommands.PrepForClimb;
@@ -37,14 +38,15 @@ public class OI {
         DriverControl.DPadRight.whenPressed(new ClimbOut(RobotContainer.climbSub));
         DriverControl.DPadDown.whenHeld(new RetractClimb(RobotContainer.climbSub));
         DriverControl.DPadLeft.whenPressed(new ClimbIn(RobotContainer.climbSub));
-
+        DriverControl.ButtonX.whenPressed(new TurnDegreesGyro(0.55, 90, RobotContainer.driveSub));
+        DriverControl.ButtonB.whenPressed(new TurnDegreesGyro(0.55, -90, RobotContainer.driveSub));
+        
 
         // Operator buttons.
         OperatorControl.ButtonR1.whenHeld(new IntakeForward(RobotContainer.intakeSub));
         OperatorControl.ButtonL1.whenHeld(new IntakeReverse(RobotContainer.intakeSub));
         OperatorControl.ButtonA.whenPressed(new PrepForClimb(RobotContainer.indexSub, RobotContainer.intakeSub, RobotContainer.shootSub));
-
-
+       
         // OperatorControl.ButtonX.whenHeld(new ShootCargo(RobotContainer.indexSub, RobotContainer.shootSub));
         OperatorControl.ButtonX.whenHeld(new AlignTurretToTarget(RobotContainer.shootSub));
         OperatorControl.ButtonB.whenHeld(new ShootCargoTwo(RobotContainer.indexSub, RobotContainer.shootSub));

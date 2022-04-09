@@ -40,7 +40,7 @@ public class ShootCargoTwo extends CommandBase {
     @Override
     public void execute() {
        // shooterSub.RunShooterRPM(8500);
-       shooterSub.RunShooterRPM(7600);
+       shooterSub.RunShooterRPM(6900);
 
         long timePassedMil = (new Date()).getTime() - initime.getTime();
         // Don't run the index until the shooter is up to speed

@@ -32,16 +32,16 @@ public class TwoBallCenter extends SequentialCommandGroup {
         // Shoot preloaded Ball
         new ShootCargo(index, shooter).withTimeout(1.5),
         // Turn and Get Ball 2
-        new TurnDegreesGyro(turnSpeed, -90, drivetrain),
-        new ExtendIntake(intake).withTimeout(0.2),
+        new ParallelCommandGroup(
+            new TurnDegreesGyro(turnSpeed, -100, drivetrain),
+            new ExtendIntake(intake).withTimeout(0.2)),
         new ParallelCommandGroup(
             new IntakeForward(intake),
             new IndexForward(index),
-            new DriveDistance(driveSpeed, -12, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1.5),
+            new DriveDistance(driveSpeed, -24, drivetrain).andThen(new WaitCommand(waitTime))).withTimeout(1.5),
         new IndexReverse(index).withTimeout(0.2),
-        new TurnDegreesGyro(turnSpeed, 90, drivetrain),
+        new TurnDegreesGyro(turnSpeed, 100, drivetrain),
         new ShootCargo(index, shooter).withTimeout(1.5),
-        new StopAll(shooter, index, intake, drivetrain)
-    );
+        new StopAll(shooter, index, intake, drivetrain));
   }
 }

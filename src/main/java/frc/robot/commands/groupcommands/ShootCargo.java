@@ -40,11 +40,11 @@ public class ShootCargo extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        shooterSub.RunShooterRPM(7200);
+        shooterSub.RunShooterRPM(7800);
         // if time is run than 2 seconds to turn on the index
         long timePassedMil = (new Date()).getTime() - initime.getTime();
         if (timePassedMil > 800) {
-            indexSub.RunIndex(.7);;
+            indexSub.RunIndex(.3);;
         }
 
         shooterSub.alignTurret(pidController, speed);
