@@ -38,11 +38,11 @@ public class ClimbSub extends SubsystemBase {
   }
 
   public void ExtendClimb() {
-    ClimbMotor.set(0.9);
+    ClimbMotor.set(1.0);
   }
 
   public void RetractClimb() {
-    ClimbMotor.set(-0.9);
+    ClimbMotor.set(-1.0);
   }
 
   public void ClimbTiltOut() {
